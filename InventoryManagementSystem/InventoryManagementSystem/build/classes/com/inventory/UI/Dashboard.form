@@ -62,7 +62,7 @@
               <Group type="102" attributes="0">
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Component id="navPanel" max="32767" attributes="0"/>
-                      <Component id="menuPanel" pref="133" max="32767" attributes="0"/>
+                      <Component id="menuPanel" pref="149" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
@@ -149,7 +149,7 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="homeButton" alignment="0" max="32767" attributes="0"/>
                           <Component id="prodButton" max="32767" attributes="0"/>
-                          <Component id="stockButton" pref="107" max="32767" attributes="0"/>
+                          <Component id="stockButton" pref="0" max="32767" attributes="0"/>
                           <Component id="custButton" max="32767" attributes="0"/>
                           <Component id="suppButton" max="32767" attributes="0"/>
                           <Component id="salesButton" max="32767" attributes="0"/>
