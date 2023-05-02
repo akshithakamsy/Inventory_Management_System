@@ -85,7 +85,7 @@ public class LoginPage extends javax.swing.JFrame {
             }
         });
 
-        clearButton.setText("CLEAR");
+        clearButton.setText("Sign Up");
         clearButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         clearButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -104,7 +104,7 @@ public class LoginPage extends javax.swing.JFrame {
                         .addGap(42, 42, 42)
                         .addComponent(loginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(clearButton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(clearButton))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -175,7 +175,7 @@ public class LoginPage extends javax.swing.JFrame {
             dispose();
             if (userType=="CUSTOMER"){
                 dispose();
-                System.out.println("Entering");
+//                System.out.println("Entering");
                 CustomerLogin loginPage = new CustomerLogin();
                 loginPage.setVisible(true);
 //                new Customer_Login().setVisible(true);
@@ -192,8 +192,9 @@ public class LoginPage extends javax.swing.JFrame {
     }//GEN-LAST:event_loginButtonActionPerformed
 
     private void clearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearButtonActionPerformed
-        userText.setText("");
-        passText.setText("");
+        dispose();
+        SignUp signup = new SignUp();
+        signup.setVisible(true);
     }//GEN-LAST:event_clearButtonActionPerformed
 
     private void passTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passTextActionPerformed
