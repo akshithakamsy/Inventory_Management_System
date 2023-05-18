@@ -13,7 +13,7 @@ import java.lang.Math;
 
 /**
  *
- * @author raghu
+ * @author akshitha
  */
 public class SignUp extends javax.swing.JFrame {
 
@@ -154,15 +154,16 @@ public class SignUp extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(49, 49, 49)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(104, Short.MAX_VALUE))
+                .addContainerGap(61, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(26, 26, 26)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 62, Short.MAX_VALUE))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
         pack();
@@ -176,6 +177,8 @@ public class SignUp extends javax.swing.JFrame {
             int val=(int) Math.random();
 //            User table
             UserDTO user = new UserDTO();
+            user.setUsername(codeText.getText());
+            user.setPassword(nameText.getText());
             user.setID(val);
             user.setFullName(FullName.getText());
             user.setPhone(phoneText.getText());

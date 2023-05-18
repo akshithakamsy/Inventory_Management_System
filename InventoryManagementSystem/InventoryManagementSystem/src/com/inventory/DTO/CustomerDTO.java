@@ -5,7 +5,10 @@
  */
 package com.inventory.DTO;
 
-
+/**
+ *
+ * @author akshtha
+ */
 
 // Data Transfer Object (DTO) class for Customers
 

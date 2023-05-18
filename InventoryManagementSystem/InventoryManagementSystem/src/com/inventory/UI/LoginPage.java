@@ -19,7 +19,7 @@ import javax.swing.*;
 
 /**
  *
- * @author asjad
+ * @author akshitha
  */
 public class LoginPage extends javax.swing.JFrame {
 
@@ -70,7 +70,7 @@ public class LoginPage extends javax.swing.JFrame {
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("STORE  INVENTORY");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ADMINISTRATOR", "EMPLOYEE", "CUSTOMER" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ADMINISTRATOR", "EMPLOYEE", "CUSTOMER", "SUPPLIER" }));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox1ActionPerformed(evt);
@@ -176,7 +176,7 @@ public class LoginPage extends javax.swing.JFrame {
             if (userType=="CUSTOMER"){
                 dispose();
 //                System.out.println("Entering");
-                CustomerLogin loginPage = new CustomerLogin();
+                CustomerLogin loginPage = new CustomerLogin(String.valueOf(userDTO.getID()));
                 loginPage.setVisible(true);
 //                new Customer_Login().setVisible(true);
             }

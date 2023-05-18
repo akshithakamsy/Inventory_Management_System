@@ -13,7 +13,7 @@ import java.sql.SQLException;
 
 /**
  *
- * @author Akshitha
+ * @author akshitha
  */
 public class CustomerPage extends javax.swing.JPanel {
 
@@ -59,7 +59,7 @@ public class CustomerPage extends javax.swing.JPanel {
         jLabel8 = new javax.swing.JLabel();
 
         jLabel1.setFont(new java.awt.Font("Impact", 0, 24)); // NOI18N
-        jLabel1.setText("CUSTOMERS");
+        jLabel1.setText("Products");
 
         entryPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Enter Customer Details"));
 

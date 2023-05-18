@@ -60,9 +60,9 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="navPanel" max="32767" attributes="0"/>
-                      <Component id="menuPanel" pref="149" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="menuPanel" min="-2" pref="149" max="-2" attributes="0"/>
+                      <Component id="navPanel" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
@@ -81,10 +81,10 @@
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="displayPanel" max="32767" attributes="0"/>
                       <Component id="navPanel" max="32767" attributes="0"/>
+                      <Component id="displayPanel" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="19" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -100,7 +100,7 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="menuButton" alignment="0" max="32767" attributes="0"/>
+                  <Component id="menuButton" alignment="0" pref="149" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
@@ -149,13 +149,14 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="homeButton" alignment="0" max="32767" attributes="0"/>
                           <Component id="prodButton" max="32767" attributes="0"/>
-                          <Component id="stockButton" pref="0" max="32767" attributes="0"/>
+                          <Component id="stockButton" max="32767" attributes="0"/>
                           <Component id="custButton" max="32767" attributes="0"/>
                           <Component id="suppButton" max="32767" attributes="0"/>
                           <Component id="salesButton" max="32767" attributes="0"/>
                           <Component id="usersButton" max="32767" attributes="0"/>
                           <Component id="purchaseButton" max="32767" attributes="0"/>
                           <Component id="logsButton" max="32767" attributes="0"/>
+                          <Component id="createAdmins" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -182,7 +183,9 @@
                       <Component id="usersButton" min="-2" pref="35" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="logsButton" min="-2" pref="35" max="-2" attributes="0"/>
-                      <EmptySpace pref="24" max="32767" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="createAdmins" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="10" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -289,6 +292,14 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="logsButtonActionPerformed"/>
               </Events>
             </Component>
+            <Component class="javax.swing.JButton" name="createAdmins">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Create Admins"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="createAdminsActionPerformed"/>
+              </Events>
+            </Component>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="displayPanel">
@@ -301,7 +312,7 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace pref="401" max="32767" attributes="0"/>
+                      <EmptySpace pref="370" max="32767" attributes="0"/>
                       <Component id="nameLabel" min="-2" pref="262" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="logoutButton" min="-2" max="-2" attributes="0"/>

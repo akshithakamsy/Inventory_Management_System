@@ -13,7 +13,7 @@ import java.sql.SQLException;
 
 /**
  *
- * @author asjad
+ * @author akshitha
  */
 public class SupplierPage extends javax.swing.JPanel {
 

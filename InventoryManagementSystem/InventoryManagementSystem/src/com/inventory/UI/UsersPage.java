@@ -13,7 +13,7 @@ import java.sql.*;
 
 /**
  *
- * @author Chandan Roy
+ * @author akshitha
  */
 public class UsersPage extends javax.swing.JPanel {
 

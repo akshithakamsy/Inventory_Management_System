@@ -6,6 +6,10 @@
 package com.inventory.DTO;
 
 
+/**
+ *
+ * @author akshtha
+ */
 // Data Transfer Object (DTO) class for Suppliers
 
 public class SupplierDTO {

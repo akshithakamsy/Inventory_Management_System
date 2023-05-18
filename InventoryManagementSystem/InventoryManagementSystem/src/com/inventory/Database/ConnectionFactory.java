@@ -15,7 +15,10 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.Properties;
 
-
+/**
+ *
+ * @author akshtha
+ */
 
 //Class to retrieve connection for database and login verfication.
 public class ConnectionFactory {

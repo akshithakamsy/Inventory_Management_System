@@ -13,7 +13,7 @@ import java.sql.SQLException;
 
 /**
  *
- * @author Chandan Roy
+ * @author akshitha
  */
 // Welcome page for the application
 public class HomePage extends javax.swing.JPanel {

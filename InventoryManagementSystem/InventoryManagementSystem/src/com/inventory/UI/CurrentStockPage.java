@@ -11,7 +11,7 @@ import java.sql.SQLException;
 
 /**
  *
- * @author Chandan Roy
+ * @author akshitha
  */
 public class CurrentStockPage extends javax.swing.JPanel {
 

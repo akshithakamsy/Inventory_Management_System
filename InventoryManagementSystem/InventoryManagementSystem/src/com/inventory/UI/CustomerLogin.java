@@ -4,23 +4,32 @@
  */
 package com.inventory.UI;
 
+import java.lang.Math;
 import com.inventory.DAO.CustomerDAO;
 import com.inventory.DAO.ProductDAO;
 import com.inventory.DTO.CustomerDTO;
+import com.inventory.DTO.SalesDTO;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import javax.swing.JOptionPane;
 
 /**
  *
- * @author Akshitha
+ * @author akshitha
  */
 public class CustomerLogin extends javax.swing.JFrame {
 
     /**
      * Creates new form CustomerLogin
      */
+    String CustId;
     public CustomerLogin() {
         initComponents();
+        loadDataSet();
+    }
+    public CustomerLogin(String CustId) {
+        initComponents();
+        this.CustId=CustId;
         loadDataSet();
     }
 
@@ -41,21 +50,17 @@ public class CustomerLogin extends javax.swing.JFrame {
         entryPanel = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        codeText = new javax.swing.JTextField();
-        nameText = new javax.swing.JTextField();
+        Quantity = new javax.swing.JTextField();
+        Amount = new javax.swing.JTextField();
         addButton = new javax.swing.JButton();
-        editButton = new javax.swing.JButton();
-        deleteButton = new javax.swing.JButton();
-        clearButton = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         productTable = new javax.swing.JTable();
-        searchText = new javax.swing.JTextField();
-        jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Impact", 0, 24)); // NOI18N
-        jLabel1.setText("CUSTOMERS");
+        jLabel1.setText("Products");
 
         entryPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Enter Customer Details"));
 
@@ -63,7 +68,7 @@ public class CustomerLogin extends javax.swing.JFrame {
 
         jLabel3.setText("Amount");
 
-        addButton.setText("Add");
+        addButton.setText("Place Order");
         addButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         addButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -71,28 +76,10 @@ public class CustomerLogin extends javax.swing.JFrame {
             }
         });
 
-        editButton.setText("Edit");
-        editButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        editButton.addActionListener(new java.awt.event.ActionListener() {
+        jButton1.setText(" Total");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editButtonActionPerformed(evt);
-            }
-        });
-
-        deleteButton.setText("Delete");
-        deleteButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        deleteButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                deleteButtonActionPerformed(evt);
-            }
-        });
-
-        clearButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        clearButton.setText("CLEAR");
-        clearButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        clearButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                clearButtonActionPerformed(evt);
+                jButton1ActionPerformed(evt);
             }
         });
 
@@ -105,23 +92,24 @@ public class CustomerLogin extends javax.swing.JFrame {
                 .addGroup(entryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(entryPanelLayout.createSequentialGroup()
                         .addGroup(entryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(clearButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(entryPanelLayout.createSequentialGroup()
-                                .addGroup(entryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(entryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(codeText)
-                                    .addComponent(nameText))))
+                                .addComponent(Quantity))
+                            .addGroup(entryPanelLayout.createSequentialGroup()
+                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(Amount)))
                         .addContainerGap())
-                    .addGroup(entryPanelLayout.createSequentialGroup()
-                        .addComponent(addButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(editButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(deleteButton)
-                        .addGap(0, 13, Short.MAX_VALUE))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, entryPanelLayout.createSequentialGroup()
+                        .addGap(0, 54, Short.MAX_VALUE)
+                        .addGroup(entryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, entryPanelLayout.createSequentialGroup()
+                                .addComponent(addButton)
+                                .addGap(97, 97, 97))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, entryPanelLayout.createSequentialGroup()
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(65, 65, 65))))))
         );
         entryPanelLayout.setVerticalGroup(
             entryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -129,19 +117,16 @@ public class CustomerLogin extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(entryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(codeText, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(Quantity, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(43, 43, 43)
+                .addComponent(jButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
                 .addGroup(entryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(nameText, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(21, 21, 21)
-                .addGroup(entryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(addButton)
-                    .addComponent(editButton)
-                    .addComponent(deleteButton))
-                .addGap(18, 18, 18)
-                .addComponent(clearButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(137, Short.MAX_VALUE))
+                    .addComponent(Amount, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(24, 24, 24)
+                .addComponent(addButton)
+                .addGap(65, 65, 65))
         );
 
         productTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -162,14 +147,6 @@ public class CustomerLogin extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(productTable);
 
-        searchText.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                searchTextKeyReleased(evt);
-            }
-        });
-
-        jLabel8.setText("Search:");
-
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -177,16 +154,14 @@ public class CustomerLogin extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel8)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(searchText, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jSeparator1)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 445, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 461, Short.MAX_VALUE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 583, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
                         .addComponent(entryPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
@@ -194,16 +169,14 @@ public class CustomerLogin extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(searchText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(entryPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(entryPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(67, Short.MAX_VALUE))
         );
 
@@ -232,7 +205,7 @@ public class CustomerLogin extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 830, Short.MAX_VALUE)
+            .addGap(0, 919, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -264,62 +237,34 @@ public class CustomerLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
-        if (codeText.getText().equals("") || nameText.getText().equals("")
-            || locationText.getText().equals("") || phoneText.getText().equals(""))
-        JOptionPane.showMessageDialog(this, "Please enter all the required details.");
+        if (Quantity.getText().equals(""))
+        JOptionPane.showMessageDialog(this, "Please enter the quantity.");
         else {
-            CustomerDTO customerDTO = new CustomerDTO();
-            customerDTO.setCustCode(codeText.getText());
-            customerDTO.setFullName(nameText.getText());
-            customerDTO.setLocation(locationText.getText());
-            customerDTO.setPhone(phoneText.getText());
-            new CustomerDAO().addCustomerDAO(customerDTO);
-            loadDataSet();
+//            CustomerDTO customerDTO = new CustomerDTO();
+//            customerDTO.setCustCode(Quantity.getText());
+//            customerDTO.setFullName(Amount.getText());
+//            customerDTO.setLocation(locationText.getText());
+//            customerDTO.setPhone(phoneText.getText());
+//            new CustomerDAO().addCustomerDAO(customerDTO);
+              
+              SalesDTO sales =  new SalesDTO();
+              int row = productTable.getSelectedRow();
+              int col = productTable.getColumnCount();
+              Object[] data = new Object[col];
+
+              for (int i=0; i<col; i++)
+              data[i] = productTable.getValueAt(row, i);
+              sales.setSalesId((int)Math.random());
+              LocalDateTime OrderTime = LocalDateTime.now();
+              sales.setDate(String.valueOf(OrderTime));
+              sales.setDeliveryAgent("Unassigned");
+              sales.setProductId((String)data[0]);
+              sales.setCustomerId(CustId);
+              
+              sales.setQuantity(Integer.parseInt(Quantity.getText()));
+              loadDataSet();
         }
     }//GEN-LAST:event_addButtonActionPerformed
-
-    private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
-        if (productTable.getSelectedRow()<0)
-        JOptionPane.showMessageDialog(this, "Select a customer from the table.");
-        else {
-            if (codeText.getText().equals("") || nameText.getText().equals("")
-                || locationText.getText().equals("") || phoneText.getText().equals(""))
-            JOptionPane.showMessageDialog(this, "Please enter all the required details.");
-            else {
-                CustomerDTO customerDTO = new CustomerDTO();
-                customerDTO.setCustCode(codeText.getText());
-                customerDTO.setFullName(nameText.getText());
-                customerDTO.setLocation(locationText.getText());
-                customerDTO.setPhone(phoneText.getText());
-                new CustomerDAO().editCustomerDAO(customerDTO);
-                loadDataSet();
-            }
-        }
-    }//GEN-LAST:event_editButtonActionPerformed
-
-    private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
-        if (productTable.getSelectedRow()<0)
-        JOptionPane.showMessageDialog(this, "Select a customer from the table.");
-        else {
-            int opt = JOptionPane.showConfirmDialog(
-                this,
-                "Are you sure you want to delete this customer?",
-                "Confirmation",
-                JOptionPane.YES_NO_OPTION);
-            if (opt==JOptionPane.YES_OPTION) {
-                new CustomerDAO().deleteCustomerDAO(productTable.getValueAt(productTable.getSelectedRow(),0).toString());
-                loadDataSet();
-            }
-        }
-    }//GEN-LAST:event_deleteButtonActionPerformed
-
-    private void clearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearButtonActionPerformed
-        codeText.setText("");
-        nameText.setText("");
-        locationText.setText("");
-        phoneText.setText("");
-        searchText.setText("");
-    }//GEN-LAST:event_clearButtonActionPerformed
 
     private void productTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_productTableMouseClicked
         int row = productTable.getSelectedRow();
@@ -328,15 +273,15 @@ public class CustomerLogin extends javax.swing.JFrame {
 
         for (int i=0; i<col; i++)
         data[i] = productTable.getValueAt(row, i);
-        codeText.setText((String) data[0]);
-        nameText.setText((String) data[1]);
-        locationText.setText((String) data[2]);
-        phoneText.setText((String) data[3]);
+//        Quantity.setText((String) data[0]);
+//        Amount.setText((String) data[1]);
+//        locationText.setText((String) data[2]);
+//        phoneText.setText((String) data[3]);
     }//GEN-LAST:event_productTableMouseClicked
 
-    private void searchTextKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchTextKeyReleased
-        //        loadSearchData(searchText.getText());
-    }//GEN-LAST:event_searchTextKeyReleased
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
     
     public void loadDataSet() {
         try {
@@ -382,23 +327,19 @@ public class CustomerLogin extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField Amount;
+    private javax.swing.JTextField Quantity;
     private javax.swing.JButton addButton;
-    private javax.swing.JButton clearButton;
-    private javax.swing.JTextField codeText;
-    private javax.swing.JButton deleteButton;
-    private javax.swing.JButton editButton;
     private javax.swing.JPanel entryPanel;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTextField nameText;
     private javax.swing.JTable productTable;
-    private javax.swing.JTextField searchText;
     // End of variables declaration//GEN-END:variables
 }

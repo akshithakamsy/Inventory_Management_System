@@ -16,7 +16,7 @@ import java.util.Vector;
 
 /**
  *
- * @author Chandan Roy
+ * @author akshitha
  */
 
 // Data Access Object for Suppliers

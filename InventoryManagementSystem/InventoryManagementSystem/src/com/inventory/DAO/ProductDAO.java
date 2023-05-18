@@ -16,7 +16,7 @@ import java.util.Vector;
 
 /**
  *
- * @author Chandan Roy
+ * @author akshitha
  */
 
 // Data Access Object for Products, Purchase, Stock and Sales
@@ -438,7 +438,7 @@ public class ProductDAO {
     // Sales table data set retrieval
     public ResultSet getSalesInfo() {
         try {
-            String query = "SELECT salesid,salesinfo.productcode,productname,salesinfo.quantity,revenue,users.name AS Sold_by FROM salesinfo INNER JOIN products ON salesinfo.productcode=products.productcode INNER JOIN users ON salesinfo.soldby=users.username";
+            String query = "SELECT salesid,salesinfo.productcode,productname,salesinfo.quantity,deliveryagent FROM salesinfo INNER JOIN products ON salesinfo.productcode=products.productcode INNER JOIN users ON salesinfo.supplier=users.username";
             resultSet = statement.executeQuery(query);
         } catch (SQLException throwables) {
             throwables.printStackTrace();

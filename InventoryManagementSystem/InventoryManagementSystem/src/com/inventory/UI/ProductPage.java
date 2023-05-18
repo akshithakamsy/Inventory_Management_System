@@ -12,10 +12,11 @@ import com.toedter.calendar.JDateChooser;
 
 import javax.swing.*;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 
 /**
  *
- * @author Chandan Roy
+ * @author akshitha
  */
 public class ProductPage extends javax.swing.JPanel {
 
@@ -321,7 +322,8 @@ public class ProductPage extends javax.swing.JPanel {
             else {
                 productDTO.setProdCode(codeText.getText());
                 productDTO.setProdName(nameText.getText());
-                productDTO.setDate(jDateChooser1.getDateFormatString());
+                LocalDateTime OrderTime = LocalDateTime.now();
+                productDTO.setDate(String.valueOf(OrderTime));
                 productDTO.setQuantity(Integer.parseInt(quantityText.getText()));
                 productDTO.setCostPrice(Double.parseDouble(costText.getText()));
                 productDTO.setSellPrice(Double.parseDouble(sellText.getText()));
@@ -342,7 +344,9 @@ public class ProductPage extends javax.swing.JPanel {
         else {
             productDTO.setProdCode(codeText.getText());
             productDTO.setProdName(nameText.getText());
-            productDTO.setDate(jDateChooser1.getDateFormatString());
+//            productDTO.setDate(jDateChooser1.getDateFormatString());
+            LocalDateTime OrderTime = LocalDateTime.now();
+            productDTO.setDate(String.valueOf(OrderTime));
             productDTO.setQuantity(Integer.parseInt(quantityText.getText()));
             productDTO.setCostPrice(Double.parseDouble(costText.getText()));
             productDTO.setSellPrice(Double.parseDouble(sellText.getText()));
@@ -375,7 +379,7 @@ public class ProductPage extends javax.swing.JPanel {
     private void clearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearButtonActionPerformed
         codeText.setText("");
         nameText.setText("");
-        jDateChooser1.setDate(null);
+//        jDateChooser1.setDate(null);
         quantityText.setText("");
         costText.setText("");
         sellText.setText("");
