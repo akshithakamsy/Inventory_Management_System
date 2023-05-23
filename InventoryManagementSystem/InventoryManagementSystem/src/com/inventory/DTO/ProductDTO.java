@@ -14,7 +14,15 @@ package com.inventory.DTO;
 
 public class ProductDTO {
 
-    private int prodID, quantity, userID;
+    private int prodID, quantity, userID,suppID;
+
+    public int getSuppID() {
+        return suppID;
+    }
+
+    public void setSuppID(int suppID) {
+        this.suppID = suppID;
+    }
     private double costPrice, sellPrice;
     private Double totalCost, totalRevenue;
     private String prodCode, prodName, date, suppCode, custCode, custName, brand;

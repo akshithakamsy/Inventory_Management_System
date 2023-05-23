@@ -173,6 +173,8 @@ public class ProductDAO {
                     + productDTO.getSellPrice()
                     + "' AND brand='"
                     + productDTO.getBrand()
+                    +"'AND suppid='"
+                    +productDTO.getUserID()
                     + "'";
             resultSet = statement.executeQuery(query);
             if (resultSet.next())
@@ -185,13 +187,14 @@ public class ProductDAO {
     }
     public void addFunction(ProductDTO productDTO) {
         try {
-            String query = "INSERT INTO products VALUES(null,?,?,?,?,?)";
+            String query = "INSERT INTO products VALUES(null,?,?,?,?,?,?)";
             prepStatement = (PreparedStatement) conn.prepareStatement(query);
             prepStatement.setString(1, productDTO.getProdCode());
-            prepStatement.setString(2, productDTO.getProdName());
-            prepStatement.setDouble(3, productDTO.getCostPrice());
-            prepStatement.setDouble(4, productDTO.getSellPrice());
-            prepStatement.setString(5, productDTO.getBrand());
+            prepStatement.setInt(2, productDTO.getUserID());
+            prepStatement.setString(3, productDTO.getProdName());
+            prepStatement.setDouble(4, productDTO.getCostPrice());
+            prepStatement.setDouble(5, productDTO.getSellPrice());
+            prepStatement.setString(6, productDTO.getBrand());
 
             String query2 = "INSERT INTO currentstock VALUES(?,?)";
             prepStatement2 = conn.prepareStatement(query2);
@@ -205,6 +208,7 @@ public class ProductDAO {
             throwables.printStackTrace();
         }
     }
+    
 
     // Method to add a new purchase transaction
     public void addPurchaseDAO(ProductDTO productDTO) {
@@ -354,16 +358,16 @@ public class ProductDAO {
 
     public void deleteSaleDAO(int ID) {
         try {
-            String query = "DELETE FROM salesinfo WHERE salesID=?";
-            prepStatement = conn.prepareStatement(query);
+            String cancel = "DELETE FROM salesinfo WHERE salesID=?";
+            prepStatement = conn.prepareStatement(cancel);
             prepStatement.setInt(1, ID);
             prepStatement.executeUpdate();
 
-            JOptionPane.showMessageDialog(null, "Transaction has been removed.");
+            JOptionPane.showMessageDialog(null, "Order cancellled");
         } catch (SQLException e){
             e.printStackTrace();
         }
-        deleteStock();
+//        deleteStock();
     }
 
     // Sales transaction handling
@@ -402,7 +406,7 @@ public class ProductDAO {
     // Products data set retrieval for display
     public ResultSet getQueryResult() {
         try {
-            String query = "SELECT productcode,productname,costprice,sellprice,brand FROM products ORDER BY pid";
+            String query = "SELECT pid,suppid,productname,costprice,sellprice,brand FROM products ORDER BY pid";
             resultSet = statement.executeQuery(query);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -434,12 +438,27 @@ public class ProductDAO {
         }
         return resultSet;
     }
+      public void updateCurrentStockInfo(String pcode, int quant) {
+        try {
+            String query ="UPDATE currentstock SET quantity =? WHERE productcode =?";        
+//            statement.executeQuery(query);
+            prepStatement = conn.prepareStatement(query);
+            prepStatement.setInt(1, quant);
+            prepStatement.setString(2, pcode);
+            prepStatement.executeUpdate();
 
+            JOptionPane.showMessageDialog(null, "Quantity has been updated");
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+//        return resultSet;
+    }
     // Sales table data set retrieval
     public ResultSet getSalesInfo() {
         try {
-            String query = "SELECT salesid,salesinfo.productcode,productname,salesinfo.quantity,deliveryagent FROM salesinfo INNER JOIN products ON salesinfo.productcode=products.productcode INNER JOIN users ON salesinfo.supplier=users.username";
+            String query = "SELECT salesid,salesinfo.productid,products.productname,salesinfo.quantity,deliveryagent FROM salesinfo INNER JOIN products ON salesinfo.productid=products.pid INNER JOIN users ON salesinfo.userid=users.id";
             resultSet = statement.executeQuery(query);
+            
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }

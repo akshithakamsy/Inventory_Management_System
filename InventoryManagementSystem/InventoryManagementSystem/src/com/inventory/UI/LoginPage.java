@@ -70,7 +70,7 @@ public class LoginPage extends javax.swing.JFrame {
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("STORE  INVENTORY");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ADMINISTRATOR", "EMPLOYEE", "CUSTOMER", "SUPPLIER" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ADMINISTRATOR", "EMPLOYEE", "CUSTOMER", "SUPPLIER", "DeliveryManager", "SupplierAdmin", "DELIVERY", "PerformanceManager", "StockManager" }));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox1ActionPerformed(evt);
@@ -173,7 +173,42 @@ public class LoginPage extends javax.swing.JFrame {
             inTime = LocalDateTime.now();
             userDTO.setInTime(String.valueOf(inTime));
             dispose();
-            if (userType=="CUSTOMER"){
+            if (userType=="EMPLOYEE"){
+                dispose();
+                ProductQuality qcheck = new ProductQuality(String.valueOf(userDTO.getID()));
+                qcheck.setVisible(true);
+            }
+            else if (userType=="SUPPLIER"){
+                dispose();
+                SupplierLogin supp = new SupplierLogin(String.valueOf(userDTO.getID()));
+                supp.setVisible(true);
+            } 
+            else if (userType=="DeliveryManager"){
+                dispose();
+                DeliveryManager del = new DeliveryManager(String.valueOf(userDTO.getID()));
+                del.setVisible(true);
+            }
+            else if (userType=="SupplierAdmin"){
+                dispose();
+                SupplierAdmin del = new SupplierAdmin(String.valueOf(userDTO.getID()));
+                del.setVisible(true);
+            }
+            else if (userType=="DELIVERY"){
+                dispose();
+                DeliveryLogin del = new DeliveryLogin(String.valueOf(userDTO.getID()));
+                del.setVisible(true);
+            }
+            else if (userType=="PerformanceManager"){
+                dispose();
+                PerformanceManager del = new PerformanceManager(String.valueOf(userDTO.getID()));
+                del.setVisible(true);
+            }
+            else if (userType=="StockManager"){
+                dispose();
+                PerformanceManager del = new PerformanceManager(String.valueOf(userDTO.getID()));
+                del.setVisible(true);
+            }
+            else if (userType=="CUSTOMER"){
                 dispose();
 //                System.out.println("Entering");
                 CustomerLogin loginPage = new CustomerLogin(String.valueOf(userDTO.getID()));

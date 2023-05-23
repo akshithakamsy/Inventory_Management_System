@@ -44,7 +44,7 @@ public class superAdmin extends javax.swing.JPanel {
         Location = new javax.swing.JTextField();
         addButton = new javax.swing.JButton();
         Cancel = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        userType = new javax.swing.JComboBox<>();
         jLabel7 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
@@ -75,7 +75,7 @@ public class superAdmin extends javax.swing.JPanel {
             }
         });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "DeliveryManager", "SupplierAdmin" }));
+        userType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "DeliveryManager", "SupplierAdmin", "PerformanceManager", "StockManager" }));
 
         jLabel7.setText("Type");
 
@@ -106,7 +106,7 @@ public class superAdmin extends javax.swing.JPanel {
                                 .addComponent(addButton)
                                 .addGap(40, 40, 40)
                                 .addComponent(Cancel))
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(userType, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 54, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -135,7 +135,7 @@ public class superAdmin extends javax.swing.JPanel {
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(entryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(userType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(entryPanelLayout.createSequentialGroup()
                         .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(3, 3, 3)))
@@ -204,7 +204,8 @@ public class superAdmin extends javax.swing.JPanel {
             user.setFullName(FullName.getText());
             user.setPhone(phoneText.getText());
             user.setLocation(Location.getText());
-            new UserDAO().addUserDAO(user,"CUSTOMER");
+            user.setUserType((String)userType.getSelectedItem());
+            new UserDAO().addUserDAO(user,"userType");
             //  user could be Delivery Admin or Supplier Admin 
 //            CustomerDTO customerDTO = new CustomerDTO();
 //            customerDTO.setCustID(val);
@@ -216,8 +217,6 @@ public class superAdmin extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Sucessfully added");
 
 //            dispose();
-            LoginPage login = new LoginPage();
-            login.setVisible(true);
 
         }
     }//GEN-LAST:event_addButtonActionPerformed
@@ -237,7 +236,6 @@ public class superAdmin extends javax.swing.JPanel {
     private javax.swing.JButton addButton;
     private javax.swing.JTextField codeText;
     private javax.swing.JPanel entryPanel;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -248,5 +246,6 @@ public class superAdmin extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField nameText;
     private javax.swing.JTextField phoneText;
+    private javax.swing.JComboBox<String> userType;
     // End of variables declaration//GEN-END:variables
 }

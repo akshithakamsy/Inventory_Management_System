@@ -84,7 +84,6 @@ public class UserDAO {
 //                    password = "user" + uCode;
 //                }
 //            }
-
             String query = "INSERT INTO users (name,location,phone,username,password,usertype) " +
                     "VALUES(?,?,?,?,?,?)";
             prepStatement = conn.prepareStatement(query);
@@ -137,11 +136,43 @@ public class UserDAO {
         }
         new UsersPage().loadDataSet();
     }
+    public void deleteUserDAO_id(int id) {
+        try {
+            String query = "DELETE FROM users WHERE id=?";
+            prepStatement = (PreparedStatement) conn.prepareStatement(query);
+            prepStatement.setInt(1, id);
+            prepStatement.executeUpdate();
+            JOptionPane.showMessageDialog(null, "User Deleted.");
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        new UsersPage().loadDataSet();
+    }
 
     // Method to retrieve data set to display in table
     public ResultSet getQueryResult() {
         try {
             String query = "SELECT * FROM users";
+            resultSet = statement.executeQuery(query);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return resultSet;
+    }
+    
+    public ResultSet getQueryResult_EMPLOYEE() {
+        try {
+            String query = "SELECT * FROM users where usertype='EMPLOYEE'";
+            resultSet = statement.executeQuery(query);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return resultSet;
+    }
+    
+    public ResultSet getQueryResult_suppliers() {
+        try {
+            String query = "SELECT * FROM users Where usertype='SUPPLIER'";
             resultSet = statement.executeQuery(query);
         } catch (SQLException throwables) {
             throwables.printStackTrace();

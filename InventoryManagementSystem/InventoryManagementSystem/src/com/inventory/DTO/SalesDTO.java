@@ -9,11 +9,27 @@ package com.inventory.DTO;
  * @author akshtha
  */
 public class SalesDTO {
-    private int salesId, quantity;
-    private String date, productId, customerId, deliveryAgent;
+    private int salesId, quantity,suppid,Amount,productId,customerId;
+
+    public int getAmount() {
+        return Amount;
+    }
+
+    public void setAmount(int Amount) {
+        this.Amount = Amount;
+    }
+    private String date,deliveryAgent;
 
     public int getSalesId() {
         return salesId;
+    }
+
+    public int getSuppid() {
+        return suppid;
+    }
+
+    public void setSuppid(int suppid) {
+        this.suppid = suppid;
     }
 
     public void setSalesId(int salesId) {
@@ -36,19 +52,19 @@ public class SalesDTO {
         this.date = date;
     }
 
-    public String getProductId() {
+    public int getProductId() {
         return productId;
     }
 
-    public void setProductId(String productId) {
+    public void setProductId(int productId) {
         this.productId = productId;
     }
 
-    public String getCustomerId() {
+    public int getCustomerId() {
         return customerId;
     }
 
-    public void setCustomerId(String customerId) {
+    public void setCustomerId(int customerId) {
         this.customerId = customerId;
     }
 

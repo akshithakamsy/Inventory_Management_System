@@ -19,6 +19,7 @@ public class DeliveryManager extends javax.swing.JFrame {
      * Creates new form DeliveryManager
      */
     CardLayout layout;
+    String userid;
     public DeliveryManager() {
         initComponents();
 //        loadDataSet();
@@ -26,6 +27,16 @@ public class DeliveryManager extends javax.swing.JFrame {
         displayPanel.setLayout(layout);
         displayPanel.add("DeliverySignup", new DeliverySignupPanel());
         displayPanel.add("SalesInfo", new SalesPage1());
+       
+    }
+    public DeliveryManager(String id) {
+        initComponents();
+//        loadDataSet();
+        layout = new CardLayout();
+        displayPanel.setLayout(layout);
+        displayPanel.add("DeliverySignup", new DeliverySignupPanel());
+        displayPanel.add("SalesInfo", new SalesPage1());
+        userid=id;
     }
 
     /**

@@ -183,14 +183,15 @@ public class SignUp extends javax.swing.JFrame {
             user.setFullName(FullName.getText());
             user.setPhone(phoneText.getText());
             user.setLocation(Location.getText());
+            user.setUserType("CUSTOMER");
             new UserDAO().addUserDAO(user,"CUSTOMER");
 //            Customer table
-            CustomerDTO customerDTO = new CustomerDTO();
-            customerDTO.setCustID(val);
-            customerDTO.setFullName(FullName.getText());
-            customerDTO.setLocation(Location.getText());
-            customerDTO.setPhone(phoneText.getText());
-            new CustomerDAO().addCustomerDAO(customerDTO);
+//            CustomerDTO customerDTO = new CustomerDTO();
+//            customerDTO.setCustID(val);
+//            customerDTO.setFullName(FullName.getText());
+//            customerDTO.setLocation(Location.getText());
+//            customerDTO.setPhone(phoneText.getText());
+//            new CustomerDAO().addCustomerDAO(customerDTO);
             
             JOptionPane.showMessageDialog(null, "Sucessfully added");
             
