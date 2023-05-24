@@ -4,7 +4,11 @@
  */
 package com.inventory.UI;
 
+import com.inventory.DAO.ProductDAO;
+import com.inventory.DAO.SalesDAO;
 import java.awt.CardLayout;
+import java.sql.SQLException;
+import javax.swing.ComboBoxModel;
 
 /**
  *
@@ -15,22 +19,16 @@ public class ProductQuality extends javax.swing.JFrame {
     /**
      * Creates new form ProductQuality
      */
-    CardLayout layout;
     String emp_id;
+    int pid;
     public ProductQuality() {
         initComponents();
-        layout = new CardLayout();
-        displayPanel.setLayout(layout);
-        displayPanel.add("ProductQuality", new QualityCheck());
-//        displayPanel.add("Analyst", new Analyst());
+        loadDataSet();
     }
     public ProductQuality(String id){
         initComponents();
+        loadDataSet();
         emp_id = id;
-        layout = new CardLayout();
-        displayPanel.setLayout(layout);
-        displayPanel.add("ProductQuality", new DeliverySignupPanel());
-//        displayPanel.add("Analyst", new Analyst());
     }
 
     /**
@@ -42,93 +40,179 @@ public class ProductQuality extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        displayPanel = new javax.swing.JPanel();
-        navPanel3 = new javax.swing.JPanel();
-        QualityCheck = new javax.swing.JButton();
-        Analyst = new javax.swing.JButton();
+        jTabbedPane1 = new javax.swing.JTabbedPane();
+        jPanel1 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        qualityTable = new javax.swing.JTable();
+        quality = new javax.swing.JComboBox<>();
+        jButton1 = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        qualityTable1 = new javax.swing.JTable();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        displayPanel.setLayout(new java.awt.CardLayout());
+        qualityTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        qualityTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                qualityTableMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(qualityTable);
 
-        navPanel3.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        quality.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Bad", "Below Average", "Average", "Good", "Very Good" }));
 
-        QualityCheck.setText("Quality Check");
-        QualityCheck.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        QualityCheck.addActionListener(new java.awt.event.ActionListener() {
+        jButton1.setText("Update");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                QualityCheckActionPerformed(evt);
+                jButton1ActionPerformed(evt);
             }
         });
 
-        Analyst.setText("Analyst");
-        Analyst.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        Analyst.addActionListener(new java.awt.event.ActionListener() {
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 678, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(quality, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(42, 42, 42)
+                        .addComponent(jButton1)))
+                .addContainerGap(27, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(124, 124, 124)
+                        .addComponent(quality, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(47, 47, 47)
+                        .addComponent(jButton1)))
+                .addContainerGap(47, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("QualityCheck", jPanel1);
+
+        qualityTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        qualityTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                qualityTable1MouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(qualityTable1);
+
+        jButton2.setText("Logout");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AnalystActionPerformed(evt);
+                jButton2ActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout navPanel3Layout = new javax.swing.GroupLayout(navPanel3);
-        navPanel3.setLayout(navPanel3Layout);
-        navPanel3Layout.setHorizontalGroup(
-            navPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(navPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(Analyst, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-            .addComponent(QualityCheck, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 744, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton2)
+                .addContainerGap(23, Short.MAX_VALUE))
         );
-        navPanel3Layout.setVerticalGroup(
-            navPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(navPanel3Layout.createSequentialGroup()
-                .addGap(144, 144, 144)
-                .addComponent(QualityCheck, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(51, 51, 51)
-                .addComponent(Analyst, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(224, Short.MAX_VALUE))
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(210, 210, 210)
+                        .addComponent(jButton2)))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
+
+        jTabbedPane1.addTab("Review Analysis", jPanel2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 898, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(navPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(displayPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 712, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap()))
+            .addComponent(jTabbedPane1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 512, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(11, 11, 11)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(displayPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(navPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+            .addComponent(jTabbedPane1)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void QualityCheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_QualityCheckActionPerformed
-        addQualityCheck();
-    }//GEN-LAST:event_QualityCheckActionPerformed
+    private void qualityTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_qualityTableMouseClicked
+        int row = qualityTable.getSelectedRow();
+        int col = qualityTable.getColumnCount();
+        Object[] data = new Object[col];
+        for (int i=0; i<col; i++)
+        data[i] = qualityTable.getValueAt(row, i);
+        pid=Integer.parseInt(data[0].toString());
+        //        quantity = Integer.parseInt(data[3].toString());
+        //        prodCode = data[1].toString();
+    }//GEN-LAST:event_qualityTableMouseClicked
 
-    private void AnalystActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AnalystActionPerformed
-        addAnalystPage();
-    }//GEN-LAST:event_AnalystActionPerformed
-    public void addQualityCheck(){
-        layout.show(displayPanel, "ProductQuality");
-    }
-    public void addAnalystPage(){
-        layout.show(displayPanel, "Analyst");
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        String review = quality.getSelectedItem().toString();
+        new ProductDAO().updateReview(pid,review);
+        loadDataSet();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void qualityTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_qualityTable1MouseClicked
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_qualityTable1MouseClicked
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        dispose();
+        LoginPage login = new LoginPage();
+        login.setVisible(true);
+    }//GEN-LAST:event_jButton2ActionPerformed
+    
+    public void loadDataSet() {
+        try {
+            ProductDAO productDAO = new ProductDAO();
+            SalesDAO sales = new SalesDAO();
+            qualityTable.setModel(productDAO.buildTableModel(productDAO.getQueryResult()));
+            qualityTable1.setModel(sales.buildTableModel(sales.getQueryResult_review()));
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
     }
     
     /**
@@ -167,15 +251,15 @@ public class ProductQuality extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Analyst;
-    private javax.swing.JButton DeliverySignup;
-    private javax.swing.JButton DeliverySignup1;
-    private javax.swing.JButton DeliverySignup2;
-    private javax.swing.JButton QualityCheck;
-    private javax.swing.JPanel displayPanel;
-    private javax.swing.JPanel navPanel;
-    private javax.swing.JPanel navPanel1;
-    private javax.swing.JPanel navPanel2;
-    private javax.swing.JPanel navPanel3;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JComboBox<String> quality;
+    private javax.swing.JTable qualityTable;
+    private javax.swing.JTable qualityTable1;
     // End of variables declaration//GEN-END:variables
 }

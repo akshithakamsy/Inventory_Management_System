@@ -4,6 +4,11 @@
  */
 package com.inventory.UI;
 
+import com.inventory.DAO.ProductDAO;
+import com.inventory.DAO.SalesDAO;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author raghu
@@ -13,13 +18,16 @@ public class DeliveryLogin extends javax.swing.JFrame {
     /**
      * Creates new form DeliveryLogin
      */
-    String userid;
+    String userid,p_status;
+    int salesid,salesid2;
     public DeliveryLogin() {
         initComponents();
+//        loadDataSet();
     }
     public DeliveryLogin(String id) {
         initComponents();
         userid=id;
+        loadDataSet(userid);
     }
 
     /**
@@ -31,21 +39,229 @@ public class DeliveryLogin extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jTabbedPane1 = new javax.swing.JTabbedPane();
+        jPanel1 = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        DeliveryTable = new javax.swing.JTable();
+        entryPanel3 = new javax.swing.JPanel();
+        delivery = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        entryPanel4 = new javax.swing.JPanel();
+        delivery1 = new javax.swing.JButton();
+        status = new javax.swing.JComboBox<>();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        DeliveryTable1 = new javax.swing.JTable();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        DeliveryTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        DeliveryTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                DeliveryTableMouseClicked(evt);
+            }
+        });
+        jScrollPane3.setViewportView(DeliveryTable);
+
+        entryPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Enter  Details"));
+
+        delivery.setText("Assign To Me");
+        delivery.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deliveryjButton1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout entryPanel3Layout = new javax.swing.GroupLayout(entryPanel3);
+        entryPanel3.setLayout(entryPanel3Layout);
+        entryPanel3Layout.setHorizontalGroup(
+            entryPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(entryPanel3Layout.createSequentialGroup()
+                .addGap(50, 50, 50)
+                .addComponent(delivery, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(85, Short.MAX_VALUE))
+        );
+        entryPanel3Layout.setVerticalGroup(
+            entryPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, entryPanel3Layout.createSequentialGroup()
+                .addContainerGap(150, Short.MAX_VALUE)
+                .addComponent(delivery)
+                .addGap(120, 120, 120))
+        );
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 691, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(entryPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(124, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(entryPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 429, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(124, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Orders", jPanel1);
+
+        entryPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Enter  Details"));
+
+        delivery1.setText("Update");
+        delivery1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                delivery1jButton1ActionPerformed(evt);
+            }
+        });
+
+        status.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "In Transit", "Out For Delivery", "DELIVERED" }));
+
+        javax.swing.GroupLayout entryPanel4Layout = new javax.swing.GroupLayout(entryPanel4);
+        entryPanel4.setLayout(entryPanel4Layout);
+        entryPanel4Layout.setHorizontalGroup(
+            entryPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(entryPanel4Layout.createSequentialGroup()
+                .addGap(51, 51, 51)
+                .addGroup(entryPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(delivery1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(status, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(84, Short.MAX_VALUE))
+        );
+        entryPanel4Layout.setVerticalGroup(
+            entryPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, entryPanel4Layout.createSequentialGroup()
+                .addContainerGap(155, Short.MAX_VALUE)
+                .addComponent(status, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(41, 41, 41)
+                .addComponent(delivery1)
+                .addGap(39, 39, 39))
+        );
+
+        DeliveryTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        DeliveryTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                DeliveryTable1MouseClicked(evt);
+            }
+        });
+        jScrollPane4.setViewportView(DeliveryTable1);
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 674, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(entryPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap(124, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(entryPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 429, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(124, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("My Deliveries", jPanel2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void DeliveryTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DeliveryTableMouseClicked
+        // TODO add your handling code here:
+        int row = DeliveryTable.getSelectedRow();
+        int col = DeliveryTable.getColumnCount();
+        Object[] data = new Object[col];
+
+        for (int i=0; i<col; i++)
+        data[i] = DeliveryTable.getValueAt(row, i);
+        salesid=(int)data[0];
+        //        Amount.setText((String) data[3]);
+//        salesid=(int)data[0];
+//        pid=(int)data[1];
+//        pname=data[3].toString();
+//        brand = data[4].toString();
+    }//GEN-LAST:event_DeliveryTableMouseClicked
+
+    private void deliveryjButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deliveryjButton1ActionPerformed
+        // TODO add your handling code here:
+//        int rate = Integer.parseInt((String) rating.getSelectedItem());
+//        new SalesDAO().
+          new SalesDAO().updateAgent(userid, salesid);
+          loadDataSet(userid);
+    }//GEN-LAST:event_deliveryjButton1ActionPerformed
+
+    private void delivery1jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delivery1jButton1ActionPerformed
+        // TODO add your handling code here:
+//        System.out.println(p_status);
+        if (status.getSelectedItem().equals("DELIVERED")){
+//            System.out.println("Not paid detected");
+            if (p_status.equals("Not Paid")){
+//                System.out.println("Delivered detected");
+                JOptionPane.showMessageDialog(null, "Payment is incomplete.Can't deliver product.");
+            }
+            else{
+            new SalesDAO().updateStatus(status.getSelectedItem().toString(),salesid2);
+            }
+        }
+        else{
+        new SalesDAO().updateStatus(status.getSelectedItem().toString(),salesid2);
+        }
+        loadDataSet(userid);
+    }//GEN-LAST:event_delivery1jButton1ActionPerformed
+
+    private void DeliveryTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DeliveryTable1MouseClicked
+        // TODO add your handling code here:
+        int row = DeliveryTable1.getSelectedRow();
+        int col = DeliveryTable1.getColumnCount();
+        Object[] data = new Object[col];
+
+        for (int i=0; i<col; i++)
+        data[i] = DeliveryTable1.getValueAt(row, i);
+        salesid2=(int)data[0];
+        p_status=data[9].toString();
+    }//GEN-LAST:event_DeliveryTable1MouseClicked
 
     /**
      * @param args the command line arguments
@@ -81,7 +297,29 @@ public class DeliveryLogin extends javax.swing.JFrame {
             }
         });
     }
+    public void loadDataSet(String userid) {
+        try {
+            ProductDAO productDAO = new ProductDAO();
+            SalesDAO sales = new SalesDAO();
+            DeliveryTable.setModel(sales.buildTableModel(sales.getQueryResult_unassigned()));
+            DeliveryTable1.setModel(sales.buildTableModel(sales.getQueryResult_assigned(userid)));
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable DeliveryTable;
+    private javax.swing.JTable DeliveryTable1;
+    private javax.swing.JButton delivery;
+    private javax.swing.JButton delivery1;
+    private javax.swing.JPanel entryPanel3;
+    private javax.swing.JPanel entryPanel4;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JComboBox<String> status;
     // End of variables declaration//GEN-END:variables
 }

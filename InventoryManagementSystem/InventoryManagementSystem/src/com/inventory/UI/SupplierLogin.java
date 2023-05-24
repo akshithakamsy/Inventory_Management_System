@@ -23,6 +23,7 @@ public class SupplierLogin extends javax.swing.JFrame {
     CardLayout layout;
     String userid;
     String pcode;
+    int curr_qual;
     public SupplierLogin() {
         initComponents();
         loadDataSet();
@@ -387,6 +388,7 @@ public class SupplierLogin extends javax.swing.JFrame {
         for (int i=0; i<col; i++)
         data[i] = salesTable.getValueAt(row, i);
         pcode = data[0].toString();
+        curr_qual = Integer.parseInt(data[2].toString());
         //        quantity = Integer.parseInt(data[3].toString());
         //        prodCode = data[1].toString();
     }//GEN-LAST:event_salesTableMouseClicked
@@ -394,8 +396,10 @@ public class SupplierLogin extends javax.swing.JFrame {
     private void AddQuantityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddQuantityActionPerformed
         // TODO add your handling code here:
         int val = Integer.parseInt(quantityText1.getText());
+        val+=curr_qual;
         new ProductDAO().updateCurrentStockInfo(pcode,val);
         loadDataSet();
+        quantityText1.setText("");
 
     }//GEN-LAST:event_AddQuantityActionPerformed
 

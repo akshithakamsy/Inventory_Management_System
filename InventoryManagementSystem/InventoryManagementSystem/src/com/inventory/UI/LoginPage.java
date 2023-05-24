@@ -185,7 +185,7 @@ public class LoginPage extends javax.swing.JFrame {
             } 
             else if (userType=="DeliveryManager"){
                 dispose();
-                DeliveryManager del = new DeliveryManager(String.valueOf(userDTO.getID()));
+                DeliveryManager del = new DeliveryManager(String.valueOf(userDTO.getID()),username,userDTO);
                 del.setVisible(true);
             }
             else if (userType=="SupplierAdmin"){

@@ -187,7 +187,7 @@ public class ProductDAO {
     }
     public void addFunction(ProductDTO productDTO) {
         try {
-            String query = "INSERT INTO products VALUES(null,?,?,?,?,?,?)";
+            String query = "INSERT INTO products VALUES(null,?,?,?,?,?,?,?)";
             prepStatement = (PreparedStatement) conn.prepareStatement(query);
             prepStatement.setString(1, productDTO.getProdCode());
             prepStatement.setInt(2, productDTO.getUserID());
@@ -195,6 +195,7 @@ public class ProductDAO {
             prepStatement.setDouble(4, productDTO.getCostPrice());
             prepStatement.setDouble(5, productDTO.getSellPrice());
             prepStatement.setString(6, productDTO.getBrand());
+            prepStatement.setString(7,"None");
 
             String query2 = "INSERT INTO currentstock VALUES(?,?)";
             prepStatement2 = conn.prepareStatement(query2);
@@ -406,7 +407,7 @@ public class ProductDAO {
     // Products data set retrieval for display
     public ResultSet getQueryResult() {
         try {
-            String query = "SELECT pid,suppid,productname,costprice,sellprice,brand FROM products ORDER BY pid";
+            String query = "SELECT pid,suppid,productname,costprice,sellprice,brand,quality FROM products ORDER BY pid";
             resultSet = statement.executeQuery(query);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -464,7 +465,22 @@ public class ProductDAO {
         }
         return resultSet;
     }
+    
+    public void updateReview(int pid, String review) {
+        try {
+            String query ="UPDATE products SET quality =? WHERE pid =?";        
+//            statement.executeQuery(query);
+            prepStatement = conn.prepareStatement(query);
+            prepStatement.setString(1, review);
+            prepStatement.setInt(2, pid);
+            prepStatement.executeUpdate();
 
+            JOptionPane.showMessageDialog(null, "Quality review has been updated");
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+//        return resultSet;
+    }
     // Search method for products
     public ResultSet getProductSearch(String text) {
         try {

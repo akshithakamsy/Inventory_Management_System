@@ -23,7 +23,7 @@ public class CustomerLogin extends javax.swing.JFrame {
     /**
      * Creates new form CustomerLogin
      */
-    int CustId,salesid;
+    int CustId,salesid,pid;
     public double price;
     int suppid,sid,total,quan;
     String pname, brand;
@@ -478,7 +478,7 @@ public class CustomerLogin extends javax.swing.JFrame {
     private void RatingjButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RatingjButton1ActionPerformed
         // TODO add your handling code here:
         int rate = Integer.parseInt((String) rating.getSelectedItem());
-        new SalesDAO().addRating(salesid, CustId, pname, brand, rate);
+        new SalesDAO().addRating(salesid, pid,CustId, pname, brand, rate);
         
     }//GEN-LAST:event_RatingjButton1ActionPerformed
 
@@ -492,8 +492,9 @@ public class CustomerLogin extends javax.swing.JFrame {
         data[i] = productTable2.getValueAt(row, i);
         //        Amount.setText((String) data[3]);
         salesid=(int)data[0];
-        pname=data[2].toString();
-        brand = data[3].toString();
+        pid=(int)data[1];
+        pname=data[3].toString();
+        brand = data[4].toString();
     }//GEN-LAST:event_productTable2MouseClicked
     
     public void loadDataSet() {
