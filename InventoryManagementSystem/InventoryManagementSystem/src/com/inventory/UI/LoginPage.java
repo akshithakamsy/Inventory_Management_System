@@ -70,7 +70,7 @@ public class LoginPage extends javax.swing.JFrame {
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("STORE  INVENTORY");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ADMINISTRATOR", "EMPLOYEE", "CUSTOMER", "SUPPLIER", "DeliveryManager", "SupplierAdmin", "DELIVERY", "PerformanceManager", "StockManager" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ADMINISTRATOR", "EMPLOYEE", "CUSTOMER", "SUPPLIER", "DeliveryManager", "SupplierAdmin", "DELIVERY", "PerformanceManager", "StockManager", "ACCOUNTANT" }));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox1ActionPerformed(evt);
@@ -206,6 +206,11 @@ public class LoginPage extends javax.swing.JFrame {
             else if (userType=="StockManager"){
                 dispose();
                 PerformanceManager del = new PerformanceManager(String.valueOf(userDTO.getID()));
+                del.setVisible(true);
+            }
+            else if (userType=="ACCOUNTANT"){
+                dispose();
+                Accountant del = new Accountant(String.valueOf(userDTO.getID()));
                 del.setVisible(true);
             }
             else if (userType=="CUSTOMER"){
