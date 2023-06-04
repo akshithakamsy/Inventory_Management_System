@@ -6,7 +6,11 @@ package com.inventory.UI;
 
 import com.inventory.DAO.ProductDAO;
 import com.inventory.DAO.SalesDAO;
+import com.inventory.DAO.UserDAO;
+import com.inventory.DTO.UserDTO;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -19,12 +23,17 @@ public class Accountant extends javax.swing.JFrame {
      */
     String userid;
     int salesid;
+    UserDTO userDTO;
+    LocalDateTime outTime;
+    String username;
     public Accountant() {
         initComponents();
     }
-    public Accountant(String id) {
+    public Accountant(String id,String username,UserDTO userDTO) {
         initComponents();
         userid=id;
+        this.username=username;
+        this.userDTO=userDTO;
         loadDataSet();
     }
 
@@ -42,6 +51,7 @@ public class Accountant extends javax.swing.JFrame {
         PaidTable1 = new javax.swing.JTable();
         entryPanel4 = new javax.swing.JPanel();
         delivery1 = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -73,21 +83,35 @@ public class Accountant extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("Logout");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout entryPanel4Layout = new javax.swing.GroupLayout(entryPanel4);
         entryPanel4.setLayout(entryPanel4Layout);
         entryPanel4Layout.setHorizontalGroup(
             entryPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(entryPanel4Layout.createSequentialGroup()
-                .addGap(44, 44, 44)
-                .addComponent(delivery1, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(91, Short.MAX_VALUE))
+                .addGroup(entryPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(entryPanel4Layout.createSequentialGroup()
+                        .addGap(16, 16, 16)
+                        .addComponent(delivery1, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(entryPanel4Layout.createSequentialGroup()
+                        .addGap(46, 46, 46)
+                        .addComponent(jButton1)))
+                .addContainerGap(119, Short.MAX_VALUE))
         );
         entryPanel4Layout.setVerticalGroup(
             entryPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, entryPanel4Layout.createSequentialGroup()
-                .addContainerGap(245, Short.MAX_VALUE)
+                .addContainerGap(82, Short.MAX_VALUE)
                 .addComponent(delivery1)
-                .addGap(25, 25, 25))
+                .addGap(48, 48, 48)
+                .addComponent(jButton1)
+                .addGap(105, 105, 105))
         );
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
@@ -152,6 +176,24 @@ public class Accountant extends javax.swing.JFrame {
         loadDataSet();
     }//GEN-LAST:event_delivery1jButton1ActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        int opt = JOptionPane.showConfirmDialog(
+                null,
+                "<html>Are you sure you want to logout?<br>You will have to login again.<html>",
+                "Confirmation",
+                JOptionPane.YES_NO_OPTION);
+        if (opt==JOptionPane.YES_OPTION){
+            outTime = LocalDateTime.now();
+            userDTO.setOutTime(String.valueOf(outTime));
+            userDTO.setUsername(username);
+            new UserDAO().addUserLogin(userDTO);
+            dispose();
+            LoginPage logPage = new LoginPage();
+            logPage.setVisible(true);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -199,6 +241,7 @@ public class Accountant extends javax.swing.JFrame {
     private javax.swing.JTable PaidTable1;
     private javax.swing.JButton delivery1;
     private javax.swing.JPanel entryPanel4;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane paidTable;

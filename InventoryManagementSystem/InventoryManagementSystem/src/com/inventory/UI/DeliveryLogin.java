@@ -6,7 +6,10 @@ package com.inventory.UI;
 
 import com.inventory.DAO.ProductDAO;
 import com.inventory.DAO.SalesDAO;
+import com.inventory.DAO.UserDAO;
+import com.inventory.DTO.UserDTO;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import javax.swing.JOptionPane;
 
 /**
@@ -20,13 +23,18 @@ public class DeliveryLogin extends javax.swing.JFrame {
      */
     String userid,p_status;
     int salesid,salesid2;
+    UserDTO userDTO;
+    LocalDateTime outTime;
+    String username;
     public DeliveryLogin() {
         initComponents();
 //        loadDataSet();
     }
-    public DeliveryLogin(String id) {
+    public DeliveryLogin(String id,String username,UserDTO userDTO) {
         initComponents();
         userid=id;
+        this.userDTO=userDTO;
+        this.username=username;
         loadDataSet(userid);
     }
 
@@ -45,6 +53,7 @@ public class DeliveryLogin extends javax.swing.JFrame {
         DeliveryTable = new javax.swing.JTable();
         entryPanel3 = new javax.swing.JPanel();
         delivery = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         entryPanel4 = new javax.swing.JPanel();
         delivery1 = new javax.swing.JButton();
@@ -81,13 +90,25 @@ public class DeliveryLogin extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("Logout");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout entryPanel3Layout = new javax.swing.GroupLayout(entryPanel3);
         entryPanel3.setLayout(entryPanel3Layout);
         entryPanel3Layout.setHorizontalGroup(
             entryPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(entryPanel3Layout.createSequentialGroup()
-                .addGap(50, 50, 50)
-                .addComponent(delivery, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(entryPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(entryPanel3Layout.createSequentialGroup()
+                        .addGap(50, 50, 50)
+                        .addComponent(delivery, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(entryPanel3Layout.createSequentialGroup()
+                        .addGap(80, 80, 80)
+                        .addComponent(jButton1)))
                 .addContainerGap(85, Short.MAX_VALUE))
         );
         entryPanel3Layout.setVerticalGroup(
@@ -95,7 +116,9 @@ public class DeliveryLogin extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, entryPanel3Layout.createSequentialGroup()
                 .addContainerGap(150, Short.MAX_VALUE)
                 .addComponent(delivery)
-                .addGap(120, 120, 120))
+                .addGap(52, 52, 52)
+                .addComponent(jButton1)
+                .addGap(33, 33, 33))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -263,6 +286,24 @@ public class DeliveryLogin extends javax.swing.JFrame {
         p_status=data[9].toString();
     }//GEN-LAST:event_DeliveryTable1MouseClicked
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        int opt = JOptionPane.showConfirmDialog(
+                null,
+                "<html>Are you sure you want to logout?<br>You will have to login again.<html>",
+                "Confirmation",
+                JOptionPane.YES_NO_OPTION);
+        if (opt==JOptionPane.YES_OPTION){
+            outTime = LocalDateTime.now();
+            userDTO.setOutTime(String.valueOf(outTime));
+            userDTO.setUsername(username);
+            new UserDAO().addUserLogin(userDTO);
+            dispose();
+            LoginPage logPage = new LoginPage();
+            logPage.setVisible(true);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -315,6 +356,7 @@ public class DeliveryLogin extends javax.swing.JFrame {
     private javax.swing.JButton delivery1;
     private javax.swing.JPanel entryPanel3;
     private javax.swing.JPanel entryPanel4;
+    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane3;

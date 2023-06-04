@@ -6,9 +6,13 @@ package com.inventory.UI;
 
 import com.inventory.DAO.ProductDAO;
 import com.inventory.DAO.SalesDAO;
+import com.inventory.DAO.UserDAO;
+import com.inventory.DTO.UserDTO;
 import java.awt.CardLayout;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import javax.swing.ComboBoxModel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -21,14 +25,19 @@ public class ProductQuality extends javax.swing.JFrame {
      */
     String emp_id;
     int pid;
+    UserDTO userDTO;
+    LocalDateTime outTime;
+    String username;
     public ProductQuality() {
         initComponents();
         loadDataSet();
     }
-    public ProductQuality(String id){
+    public ProductQuality(String id,String username,UserDTO userDTO){
         initComponents();
         loadDataSet();
         emp_id = id;
+        this.userDTO=userDTO;
+        this.username=username;
     }
 
     /**
@@ -46,6 +55,8 @@ public class ProductQuality extends javax.swing.JFrame {
         qualityTable = new javax.swing.JTable();
         quality = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
+        searchText = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         qualityTable1 = new javax.swing.JTable();
@@ -80,6 +91,19 @@ public class ProductQuality extends javax.swing.JFrame {
             }
         });
 
+        searchText.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchTextActionPerformed(evt);
+            }
+        });
+        searchText.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                searchTextKeyReleased(evt);
+            }
+        });
+
+        jLabel9.setText("Search:");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -89,12 +113,17 @@ public class ProductQuality extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 678, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(quality, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(47, 47, 47)
+                        .addComponent(jButton1))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(42, 42, 42)
-                        .addComponent(jButton1)))
-                .addContainerGap(27, Short.MAX_VALUE))
+                        .addGap(30, 30, 30)
+                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(searchText, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(quality, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(10, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -102,9 +131,13 @@ public class ProductQuality extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(124, 124, 124)
+                        .addGap(17, 17, 17)
+                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(searchText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(112, 112, 112)
                         .addComponent(quality, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(47, 47, 47)
+                        .addGap(28, 28, 28)
                         .addComponent(jButton1)))
                 .addContainerGap(47, Short.MAX_VALUE))
         );
@@ -145,7 +178,7 @@ public class ProductQuality extends javax.swing.JFrame {
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 744, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton2)
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -199,11 +232,41 @@ public class ProductQuality extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        dispose();
-        LoginPage login = new LoginPage();
-        login.setVisible(true);
+//        dispose();
+//        LoginPage login = new LoginPage();
+//        login.setVisible(true);
+            int opt = JOptionPane.showConfirmDialog(
+                null,
+                "<html>Are you sure you want to logout?<br>You will have to login again.<html>",
+                "Confirmation",
+                JOptionPane.YES_NO_OPTION);
+        if (opt==JOptionPane.YES_OPTION){
+            outTime = LocalDateTime.now();
+            userDTO.setOutTime(String.valueOf(outTime));
+            userDTO.setUsername(username);
+            new UserDAO().addUserLogin(userDTO);
+            dispose();
+            LoginPage logPage = new LoginPage();
+            logPage.setVisible(true);
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void searchTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchTextActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_searchTextActionPerformed
+
+    private void searchTextKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchTextKeyReleased
+        loadSearchData(searchText.getText());
+    }//GEN-LAST:event_searchTextKeyReleased
     
+    public void loadSearchData(String text) {
+        try {
+            ProductDAO productDAO = new ProductDAO();
+            qualityTable.setModel(productDAO.buildTableModel(productDAO.getProductSearch(text)));
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
     public void loadDataSet() {
         try {
             ProductDAO productDAO = new ProductDAO();
@@ -253,6 +316,7 @@ public class ProductQuality extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
@@ -261,5 +325,6 @@ public class ProductQuality extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> quality;
     private javax.swing.JTable qualityTable;
     private javax.swing.JTable qualityTable1;
+    private javax.swing.JTextField searchText;
     // End of variables declaration//GEN-END:variables
 }

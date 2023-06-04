@@ -5,7 +5,9 @@
 package com.inventory.UI;
 
 import com.inventory.DAO.ProductDAO;
+import com.inventory.DAO.UserDAO;
 import com.inventory.DTO.ProductDTO;
+import com.inventory.DTO.UserDTO;
 import java.awt.CardLayout;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
@@ -24,6 +26,9 @@ public class SupplierLogin extends javax.swing.JFrame {
     String userid;
     String pcode;
     int curr_qual;
+    String username;
+    UserDTO userDTO;
+    LocalDateTime outTime;
     public SupplierLogin() {
         initComponents();
         loadDataSet();
@@ -32,10 +37,12 @@ public class SupplierLogin extends javax.swing.JFrame {
 //        displayPanel.add("existingStock", new ExistingProduct());
 //        displayPanel.add("newProduct", new newProduct());
     }
-    public SupplierLogin(String id) {
+    public SupplierLogin(String id,String username,UserDTO userDTO) {
         initComponents();
         loadDataSet();
         userid=id;
+        this.userDTO=userDTO;
+        this.username=username;
 //        displayPanel.setLayout(layout);
 //        displayPanel.add("existingStock", new ExistingProduct());
 //        displayPanel.add("newProduct", new newProduct(id));
@@ -405,9 +412,23 @@ public class SupplierLogin extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        dispose();
-        LoginPage login= new LoginPage();
-        login.setVisible(true);
+//        dispose();
+//        LoginPage login= new LoginPage();
+//        login.setVisible(true);
+        int opt = JOptionPane.showConfirmDialog(
+                null,
+                "<html>Are you sure you want to logout?<br>You will have to login again.<html>",
+                "Confirmation",
+                JOptionPane.YES_NO_OPTION);
+        if (opt==JOptionPane.YES_OPTION){
+            outTime = LocalDateTime.now();
+            userDTO.setOutTime(String.valueOf(outTime));
+            userDTO.setUsername(username);
+            new UserDAO().addUserLogin(userDTO);
+            dispose();
+            LoginPage logPage = new LoginPage();
+            logPage.setVisible(true);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
     public void loadDataSet() {
         try {

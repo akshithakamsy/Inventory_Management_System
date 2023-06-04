@@ -175,12 +175,12 @@ public class LoginPage extends javax.swing.JFrame {
             dispose();
             if (userType=="EMPLOYEE"){
                 dispose();
-                ProductQuality qcheck = new ProductQuality(String.valueOf(userDTO.getID()));
+                ProductQuality qcheck = new ProductQuality(String.valueOf(userDTO.getID()),username,userDTO);
                 qcheck.setVisible(true);
             }
             else if (userType=="SUPPLIER"){
                 dispose();
-                SupplierLogin supp = new SupplierLogin(String.valueOf(userDTO.getID()));
+                SupplierLogin supp = new SupplierLogin(String.valueOf(userDTO.getID()),username,userDTO);
                 supp.setVisible(true);
             } 
             else if (userType=="DeliveryManager"){
@@ -190,33 +190,33 @@ public class LoginPage extends javax.swing.JFrame {
             }
             else if (userType=="SupplierAdmin"){
                 dispose();
-                SupplierAdmin del = new SupplierAdmin(String.valueOf(userDTO.getID()));
+                SupplierAdmin del = new SupplierAdmin(String.valueOf(userDTO.getID()),username,userDTO);
                 del.setVisible(true);
             }
             else if (userType=="DELIVERY"){
                 dispose();
-                DeliveryLogin del = new DeliveryLogin(String.valueOf(userDTO.getID()));
+                DeliveryLogin del = new DeliveryLogin(String.valueOf(userDTO.getID()),username,userDTO);
                 del.setVisible(true);
             }
             else if (userType=="PerformanceManager"){
                 dispose();
-                PerformanceManager del = new PerformanceManager(String.valueOf(userDTO.getID()));
+                PerformanceManager del = new PerformanceManager(String.valueOf(userDTO.getID()),username,userDTO);
                 del.setVisible(true);
             }
             else if (userType=="StockManager"){
                 dispose();
-                PerformanceManager del = new PerformanceManager(String.valueOf(userDTO.getID()));
+                PerformanceManager del = new PerformanceManager(String.valueOf(userDTO.getID()),username,userDTO);
                 del.setVisible(true);
             }
             else if (userType=="ACCOUNTANT"){
                 dispose();
-                Accountant del = new Accountant(String.valueOf(userDTO.getID()));
+                Accountant del = new Accountant(String.valueOf(userDTO.getID()),username,userDTO);
                 del.setVisible(true);
             }
             else if (userType=="CUSTOMER"){
                 dispose();
 //                System.out.println("Entering");
-                CustomerLogin loginPage = new CustomerLogin(String.valueOf(userDTO.getID()));
+                CustomerLogin loginPage = new CustomerLogin(String.valueOf(userDTO.getID()),username,userDTO);
                 loginPage.setVisible(true);
 //                new Customer_Login().setVisible(true);
             }

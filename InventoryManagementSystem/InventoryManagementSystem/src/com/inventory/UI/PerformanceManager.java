@@ -6,11 +6,12 @@ package com.inventory.UI;
 import com.inventory.DAO.UserDAO;
 import com.inventory.DTO.UserDTO;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import javax.swing.JOptionPane;
 
 /**
  *
- * @author raghu
+ * @author akshitha
  */
 public class PerformanceManager extends javax.swing.JFrame {
 
@@ -18,12 +19,17 @@ public class PerformanceManager extends javax.swing.JFrame {
      * Creates new form PerformanceManager
      */
     String userid;
+    UserDTO userDTO;
+    LocalDateTime outTime;
+    String username;
     public PerformanceManager() {
         initComponents();
     }
-    public PerformanceManager(String id) {
+    public PerformanceManager(String id,String username, UserDTO userDTO) {
         initComponents();
         userid=id;
+        this.userDTO=userDTO;
+        this.username=username;
         loadDataSet();
     }
 
@@ -51,10 +57,11 @@ public class PerformanceManager extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         contact = new javax.swing.JTextField();
         fullname = new javax.swing.JTextField();
-        username = new javax.swing.JTextField();
+        Username = new javax.swing.JTextField();
         password = new javax.swing.JTextField();
         Location = new javax.swing.JTextField();
         addButton = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -127,6 +134,13 @@ public class PerformanceManager extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("Logout");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout entryPanelLayout = new javax.swing.GroupLayout(entryPanel);
         entryPanel.setLayout(entryPanelLayout);
         entryPanelLayout.setHorizontalGroup(
@@ -144,13 +158,15 @@ public class PerformanceManager extends javax.swing.JFrame {
                     .addComponent(contact)
                     .addComponent(Location)
                     .addComponent(fullname)
-                    .addComponent(username)
+                    .addComponent(Username)
                     .addComponent(password))
                 .addContainerGap())
             .addGroup(entryPanelLayout.createSequentialGroup()
                 .addGap(261, 261, 261)
-                .addComponent(addButton)
-                .addContainerGap(266, Short.MAX_VALUE))
+                .addGroup(entryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton1)
+                    .addComponent(addButton))
+                .addContainerGap(261, Short.MAX_VALUE))
         );
         entryPanelLayout.setVerticalGroup(
             entryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -158,7 +174,7 @@ public class PerformanceManager extends javax.swing.JFrame {
                 .addGap(39, 39, 39)
                 .addGroup(entryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(username, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Username, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(entryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -177,7 +193,9 @@ public class PerformanceManager extends javax.swing.JFrame {
                     .addComponent(Location, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(28, 28, 28)
                 .addComponent(addButton)
-                .addContainerGap(151, Short.MAX_VALUE))
+                .addGap(35, 35, 35)
+                .addComponent(jButton1)
+                .addContainerGap(81, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -185,7 +203,7 @@ public class PerformanceManager extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(149, Short.MAX_VALUE)
+                .addContainerGap(154, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addComponent(entryPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -223,7 +241,7 @@ public class PerformanceManager extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
-        if (username.getText().equals("") || password.getText().equals("")
+        if (Username.getText().equals("") || password.getText().equals("")
             || fullname.getText().equals("") || contact.getText().equals("")
             || Location.getText().equals(""))
         JOptionPane.showMessageDialog(this, "Please enter valid details");
@@ -231,7 +249,7 @@ public class PerformanceManager extends javax.swing.JFrame {
             int val=(int) Math.random();
             //            User table
             UserDTO user = new UserDTO();
-            user.setUsername(username.getText());
+            user.setUsername(Username.getText());
             user.setPassword(password.getText());
             user.setID(val);
             user.setFullName(fullname.getText());
@@ -258,6 +276,24 @@ public class PerformanceManager extends javax.swing.JFrame {
         //        quantity = Integer.parseInt(data[3].toString());
         //        prodCode = data[1].toString();
     }//GEN-LAST:event_EmployeeTableMouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        int opt = JOptionPane.showConfirmDialog(
+                null,
+                "<html>Are you sure you want to logout?<br>You will have to login again.<html>",
+                "Confirmation",
+                JOptionPane.YES_NO_OPTION);
+        if (opt==JOptionPane.YES_OPTION){
+            outTime = LocalDateTime.now();
+            userDTO.setOutTime(String.valueOf(outTime));
+            userDTO.setUsername(username);
+            new UserDAO().addUserLogin(userDTO);
+            dispose();
+            LoginPage logPage = new LoginPage();
+            logPage.setVisible(true);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -305,10 +341,12 @@ public class PerformanceManager extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable EmployeeTable;
     private javax.swing.JTextField Location;
+    private javax.swing.JTextField Username;
     private javax.swing.JButton addButton;
     private javax.swing.JTextField contact;
     private javax.swing.JPanel entryPanel;
     private javax.swing.JTextField fullname;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -321,6 +359,5 @@ public class PerformanceManager extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextField password;
-    private javax.swing.JTextField username;
     // End of variables declaration//GEN-END:variables
 }

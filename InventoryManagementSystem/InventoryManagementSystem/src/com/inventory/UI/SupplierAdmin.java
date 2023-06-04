@@ -9,6 +9,7 @@ import com.inventory.DAO.UserDAO;
 import com.inventory.DTO.SupplierDTO;
 import com.inventory.DTO.UserDTO;
 import java.awt.CardLayout;
+import java.time.LocalDateTime;
 import javax.swing.JOptionPane;
 
 /**
@@ -22,6 +23,9 @@ public class SupplierAdmin extends javax.swing.JFrame {
      */
     CardLayout layout;
     String userid;
+    UserDTO userDTO;
+    LocalDateTime outTime;
+    String username;
     public SupplierAdmin() {
         initComponents();
         layout = new CardLayout();
@@ -29,9 +33,11 @@ public class SupplierAdmin extends javax.swing.JFrame {
         displayPanel.add("signup", new SupplierSignup());
         displayPanel.add("viewSuppliers", new ViewSuppliers());
     }
-    public SupplierAdmin(String id) {
+    public SupplierAdmin(String id,String username,UserDTO userDTO) {
         initComponents();
         userid=id;
+        this.username=username;
+        this.userDTO=userDTO;
         layout = new CardLayout();
         displayPanel.setLayout(layout);
         displayPanel.add("signup", new SupplierSignup());
@@ -148,9 +154,23 @@ public class SupplierAdmin extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        dispose();
-        LoginPage login = new LoginPage();
-        login.setVisible(true);
+//        dispose();
+//        LoginPage login = new LoginPage();
+//        login.setVisible(true);
+        int opt = JOptionPane.showConfirmDialog(
+                null,
+                "<html>Are you sure you want to logout?<br>You will have to login again.<html>",
+                "Confirmation",
+                JOptionPane.YES_NO_OPTION);
+        if (opt==JOptionPane.YES_OPTION){
+            outTime = LocalDateTime.now();
+            userDTO.setOutTime(String.valueOf(outTime));
+            userDTO.setUsername(username);
+            new UserDAO().addUserLogin(userDTO);
+            dispose();
+            LoginPage logPage = new LoginPage();
+            logPage.setVisible(true);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
     public void addSignupPage(){
         layout.show(displayPanel, "signup");

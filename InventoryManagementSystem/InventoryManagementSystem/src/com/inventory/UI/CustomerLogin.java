@@ -8,8 +8,10 @@ import java.lang.Math;
 import com.inventory.DAO.CustomerDAO;
 import com.inventory.DAO.ProductDAO;
 import com.inventory.DAO.SalesDAO;
+import com.inventory.DAO.UserDAO;
 import com.inventory.DTO.CustomerDTO;
 import com.inventory.DTO.SalesDTO;
+import com.inventory.DTO.UserDTO;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import javax.swing.JOptionPane;
@@ -27,12 +29,17 @@ public class CustomerLogin extends javax.swing.JFrame {
     public double price;
     int suppid,sid,total,quan;
     String pname, brand;
+    UserDTO userDTO;
+    LocalDateTime outTime;
+    String username;
     public CustomerLogin() {
         initComponents();
         loadDataSet();
     }
-    public CustomerLogin(String CustId) {
+    public CustomerLogin(String CustId,String username,UserDTO userDTO) {
         initComponents();
+        this.username=username;
+        this.userDTO=userDTO;
         this.CustId=Integer.parseInt(CustId);
         loadDataSet();
     }
@@ -388,9 +395,23 @@ public class CustomerLogin extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        dispose();
-        LoginPage login = new LoginPage();
-        login.setVisible(true);
+//        dispose();
+//        LoginPage login = new LoginPage();
+//        login.setVisible(true);
+        int opt = JOptionPane.showConfirmDialog(
+                null,
+                "<html>Are you sure you want to logout?<br>You will have to login again.<html>",
+                "Confirmation",
+                JOptionPane.YES_NO_OPTION);
+        if (opt==JOptionPane.YES_OPTION){
+            outTime = LocalDateTime.now();
+            userDTO.setOutTime(String.valueOf(outTime));
+            userDTO.setUsername(username);
+            new UserDAO().addUserLogin(userDTO);
+            dispose();
+            LoginPage logPage = new LoginPage();
+            logPage.setVisible(true);
+        }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void cancelOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelOrderActionPerformed
