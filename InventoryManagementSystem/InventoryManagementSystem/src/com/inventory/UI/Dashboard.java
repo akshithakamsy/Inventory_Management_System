@@ -56,7 +56,7 @@ public class Dashboard extends javax.swing.JFrame {
         displayPanel.add("Sales", new SalesPage(username, this));
         displayPanel.add("Purchase", new PurchasePage(this));
         displayPanel.add("Logs", new UserLogsPage());
-        displayPanel.add("createAdmin", new superAdmin());
+//        displayPanel.add("createAdmin", new superAdmin());
 
         this.addWindowListener(new WindowAdapter() {
             @Override
@@ -127,7 +127,6 @@ public class Dashboard extends javax.swing.JFrame {
         usersButton = new javax.swing.JButton();
         purchaseButton = new javax.swing.JButton();
         logsButton = new javax.swing.JButton();
-        createAdmins = new javax.swing.JButton();
         displayPanel = new javax.swing.JPanel();
         userPanel = new javax.swing.JPanel();
         nameLabel = new javax.swing.JLabel();
@@ -239,13 +238,6 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
 
-        createAdmins.setText("Create Admins");
-        createAdmins.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                createAdminsActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout navPanelLayout = new javax.swing.GroupLayout(navPanel);
         navPanel.setLayout(navPanelLayout);
         navPanelLayout.setHorizontalGroup(
@@ -255,14 +247,13 @@ public class Dashboard extends javax.swing.JFrame {
                 .addGroup(navPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(homeButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(prodButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(stockButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(stockButton, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE)
                     .addComponent(custButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(suppButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(salesButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(usersButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(purchaseButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(logsButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(createAdmins, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(logsButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         navPanelLayout.setVerticalGroup(
@@ -286,9 +277,7 @@ public class Dashboard extends javax.swing.JFrame {
                 .addComponent(usersButton, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(logsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(createAdmins)
-                .addContainerGap(10, Short.MAX_VALUE))
+                .addContainerGap(57, Short.MAX_VALUE))
         );
 
         displayPanel.setLayout(new java.awt.CardLayout());
@@ -434,11 +423,6 @@ public class Dashboard extends javax.swing.JFrame {
         addLogsPage();
     }//GEN-LAST:event_logsButtonActionPerformed
 
-    private void createAdminsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createAdminsActionPerformed
-        // TODO add your handling code here:
-        addAdmincreationPage();
-    }//GEN-LAST:event_createAdminsActionPerformed
-
     // Method to display the user currently logged in
     public void currentUserSession() {
         UserDTO userDTO = new UserDTO();
@@ -454,7 +438,6 @@ public class Dashboard extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton createAdmins;
     private javax.swing.JButton custButton;
     private javax.swing.JPanel displayPanel;
     private javax.swing.JButton homeButton;

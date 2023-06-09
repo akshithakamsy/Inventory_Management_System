@@ -253,6 +253,11 @@ public class PurchasePage extends javax.swing.JPanel {
             }
         });
 
+        searchText.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchTextActionPerformed(evt);
+            }
+        });
         searchText.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 searchTextKeyReleased(evt);
@@ -407,6 +412,10 @@ public class PurchasePage extends javax.swing.JPanel {
         }
 
     }//GEN-LAST:event_codeTextKeyReleased
+
+    private void searchTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchTextActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_searchTextActionPerformed
 
     // Method to load and update combo box containing supplier names
     public void loadComboBox() {

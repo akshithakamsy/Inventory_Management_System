@@ -149,14 +149,13 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="homeButton" alignment="0" max="32767" attributes="0"/>
                           <Component id="prodButton" max="32767" attributes="0"/>
-                          <Component id="stockButton" max="32767" attributes="0"/>
+                          <Component id="stockButton" pref="162" max="32767" attributes="0"/>
                           <Component id="custButton" max="32767" attributes="0"/>
                           <Component id="suppButton" max="32767" attributes="0"/>
                           <Component id="salesButton" max="32767" attributes="0"/>
                           <Component id="usersButton" max="32767" attributes="0"/>
                           <Component id="purchaseButton" max="32767" attributes="0"/>
                           <Component id="logsButton" max="32767" attributes="0"/>
-                          <Component id="createAdmins" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -183,9 +182,7 @@
                       <Component id="usersButton" min="-2" pref="35" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="logsButton" min="-2" pref="35" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="createAdmins" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="10" max="32767" attributes="0"/>
+                      <EmptySpace pref="57" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -290,14 +287,6 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="logsButtonActionPerformed"/>
-              </Events>
-            </Component>
-            <Component class="javax.swing.JButton" name="createAdmins">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Create Admins"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="createAdminsActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>

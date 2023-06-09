@@ -466,6 +466,17 @@ public class ProductDAO {
         return resultSet;
     }
     
+    public ResultSet getSalesInfo_sales() {
+        try {
+            String query = "SELECT salesid,salesinfo.productid,products.productname,salesinfo.quantity,deliveryagent FROM salesinfo INNER JOIN products ON salesinfo.productid=products.pid";
+            resultSet = statement.executeQuery(query);
+            
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return resultSet;
+    }
+    
     public void updateReview(int pid, String review) {
         try {
             String query ="UPDATE products SET quality =? WHERE pid =?";        
@@ -507,16 +518,9 @@ public class ProductDAO {
     // Search method for sales
     public ResultSet getSalesSearch(String text) {
         try {
-            String query = "SELECT salesid,salesinfo.productcode,productname,\n" +
-                    "                    salesinfo.quantity,revenue,users.name AS Sold_by\n" +
-                    "                    FROM salesinfo INNER JOIN products\n" +
-                    "                    ON salesinfo.productcode=products.productcode\n" +
-                    "                    INNER JOIN users\n" +
-                    "                    ON salesinfo.soldby=users.username\n" +
-                    "                    INNER JOIN customers\n" +
-                    "                    ON customers.customercode=salesinfo.customercode\n" +
-                    "WHERE salesinfo.productcode LIKE '%"+text+"%' OR productname LIKE '%"+text+"%' " +
-                    "OR users.name LIKE '%"+text+"%' OR customers.fullname LIKE '%"+text+"%' ORDER BY salesid;";
+            String query = "SELECT salesid, userid, productid,deliveryagent,amount FROM salesinfo\n" +
+                    "WHERE salesid LIKE '%"+text+"%' OR userid LIKE '%"+text+"%' " +
+                    "OR productid LIKE '%"+text+"%' OR deliveryagent LIKE '%"+text+"%' ORDER BY salesid;";
             resultSet = statement.executeQuery(query);
         } catch (SQLException e) {
             e.printStackTrace();

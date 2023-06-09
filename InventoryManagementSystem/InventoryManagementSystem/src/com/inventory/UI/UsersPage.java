@@ -69,7 +69,7 @@ public class UsersPage extends javax.swing.JPanel {
 
         jLabel6.setText("Password:");
 
-        userTypeCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ADMINISTRATOR", "EMPLOYEE" }));
+        userTypeCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "DeliveryManager", "SupplierAdmin", "PerformanceManager", "StockManager", "ACCOUNTANT" }));
 
         addButton.setText("Add");
         addButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -188,7 +188,6 @@ public class UsersPage extends javax.swing.JPanel {
         });
         userTable.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         userTable.setName("Users"); // NOI18N
-        userTable.setShowGrid(true);
         userTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 userTableMouseClicked(evt);

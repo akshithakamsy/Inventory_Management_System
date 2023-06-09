@@ -211,6 +211,19 @@ public class UserDAO {
         }
         return resultSet;
     }
+    
+    public ResultSet getUserLogsDAO_search(String text) {
+        try {
+            String query = "SELECT users.name,userlogs.username,in_time,out_time,location FROM userlogs" +
+                    " INNER JOIN users on userlogs.username=users.username WHERE users.name LIKE '%"+
+                    text+"%' OR userlogs.username LIKE '%"+text+"%'";
+            resultSet = statement.executeQuery(query);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return resultSet;
+    }
+    
     public void addUserLogin(UserDTO userDTO) {
         try {
             String query = "INSERT INTO userlogs (username, in_time, out_time) values(?,?,?)";
