@@ -12,9 +12,17 @@ import com.inventory.DAO.UserDAO;
 import com.inventory.DTO.CustomerDTO;
 import com.inventory.DTO.SalesDTO;
 import com.inventory.DTO.UserDTO;
+import com.inventory.Database.ConnectionFactory;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import javax.swing.JOptionPane;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartFrame;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.chart.renderer.category.BarRenderer;
+import org.jfree.data.category.CategoryDataset;
+import org.jfree.data.jdbc.JDBCCategoryDataset;
 
 /**
  *
@@ -64,6 +72,7 @@ public class CustomerLogin extends javax.swing.JFrame {
         Amount2 = new javax.swing.JTextField();
         addButton2 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         jSeparator3 = new javax.swing.JSeparator();
         jPanel5 = new javax.swing.JPanel();
@@ -123,6 +132,13 @@ public class CustomerLogin extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("Best Selling Products");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout entryPanel2Layout = new javax.swing.GroupLayout(entryPanel2);
         entryPanel2.setLayout(entryPanel2Layout);
         entryPanel2Layout.setHorizontalGroup(
@@ -149,7 +165,11 @@ public class CustomerLogin extends javax.swing.JFrame {
                                 .addGap(97, 97, 97))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, entryPanel2Layout.createSequentialGroup()
                                 .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(65, 65, 65))))))
+                                .addGap(65, 65, 65))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, entryPanel2Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         entryPanel2Layout.setVerticalGroup(
             entryPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -166,7 +186,9 @@ public class CustomerLogin extends javax.swing.JFrame {
                     .addComponent(Amount2, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(24, 24, 24)
                 .addComponent(addButton2)
-                .addGap(65, 65, 65))
+                .addGap(18, 18, 18)
+                .addComponent(jButton1)
+                .addGap(12, 12, 12))
         );
 
         jLabel7.setFont(new java.awt.Font("Impact", 0, 24)); // NOI18N
@@ -519,6 +541,25 @@ public class CustomerLogin extends javax.swing.JFrame {
         pname=data[3].toString();
         brand = data[4].toString();
     }//GEN-LAST:event_productTable2MouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        try{
+         String query = "select b.productname,count(*) as count from salesinfo a inner join products b on\n" +
+"a.productid=b.pid group by b.productname limit 10";
+         JDBCCategoryDataset result = new JDBCCategoryDataset(new ConnectionFactory().getConn(),query);
+         JFreeChart chart = ChartFactory.createLineChart("Best Sellers", "product", "Count", (CategoryDataset) result);
+         BarRenderer ren = null;
+         CategoryPlot plot = null;
+         ren=new BarRenderer();
+         ChartFrame frame= new ChartFrame("Best Sellers",chart);
+         frame.setVisible(true);
+         frame.setSize(400,650);
+        }
+        catch (Exception e){
+            JOptionPane.showMessageDialog(null,e);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
     
     public void loadDataSet() {
         try {
@@ -575,6 +616,7 @@ public class CustomerLogin extends javax.swing.JFrame {
     private javax.swing.JTextField editOrder;
     private javax.swing.JPanel entryPanel2;
     private javax.swing.JPanel entryPanel3;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton5;

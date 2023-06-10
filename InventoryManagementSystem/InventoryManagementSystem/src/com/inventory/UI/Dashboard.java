@@ -61,7 +61,7 @@ public class Dashboard extends javax.swing.JFrame {
         displayPanel.add("Suppliers", new SupplierPage());
         displayPanel.add("Current Stock", new CurrentStockPage(username));
         displayPanel.add("Sales", new SalesPage(username, this));
-        displayPanel.add("Purchase", new PurchasePage(this));
+//        displayPanel.add("Purchase", new PurchasePage(this));
         displayPanel.add("Logs", new UserLogsPage());
 //        displayPanel.add("createAdmin", new superAdmin());
 
@@ -132,7 +132,6 @@ public class Dashboard extends javax.swing.JFrame {
         suppButton = new javax.swing.JButton();
         salesButton = new javax.swing.JButton();
         usersButton = new javax.swing.JButton();
-        purchaseButton = new javax.swing.JButton();
         logsButton = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         displayPanel = new javax.swing.JPanel();
@@ -230,14 +229,6 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
 
-        purchaseButton.setText("Purchase");
-        purchaseButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        purchaseButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                purchaseButtonActionPerformed(evt);
-            }
-        });
-
         logsButton.setText("User Logs");
         logsButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         logsButton.addActionListener(new java.awt.event.ActionListener() {
@@ -267,7 +258,6 @@ public class Dashboard extends javax.swing.JFrame {
                     .addComponent(suppButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(salesButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(usersButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(purchaseButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(logsButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
@@ -288,14 +278,12 @@ public class Dashboard extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(salesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(purchaseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
                 .addComponent(usersButton, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(logsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGap(59, 59, 59))
         );
 
         displayPanel.setLayout(new java.awt.CardLayout());
@@ -433,10 +421,6 @@ public class Dashboard extends javax.swing.JFrame {
         navPanel.setVisible(!navPanel.isVisible());
     }//GEN-LAST:event_menuButtonActionPerformed
 
-    private void purchaseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_purchaseButtonActionPerformed
-        addPurchasePage();
-    }//GEN-LAST:event_purchaseButtonActionPerformed
-
     private void logsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logsButtonActionPerformed
         addLogsPage();
     }//GEN-LAST:event_logsButtonActionPerformed
@@ -489,7 +473,6 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JLabel nameLabel;
     private javax.swing.JPanel navPanel;
     private javax.swing.JButton prodButton;
-    private javax.swing.JButton purchaseButton;
     private javax.swing.JButton salesButton;
     private javax.swing.JButton stockButton;
     private javax.swing.JButton suppButton;
