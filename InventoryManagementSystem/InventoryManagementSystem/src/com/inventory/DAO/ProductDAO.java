@@ -189,8 +189,9 @@ public class ProductDAO {
         try {
             String query = "INSERT INTO products VALUES(null,?,?,?,?,?,?,?)";
             prepStatement = (PreparedStatement) conn.prepareStatement(query);
-            prepStatement.setString(1, productDTO.getProdCode());
-            prepStatement.setInt(2, productDTO.getUserID());
+            prepStatement.setInt(1, productDTO.getSuppID());
+            prepStatement.setString(2, productDTO.getProdCode());
+            
             prepStatement.setString(3, productDTO.getProdName());
             prepStatement.setDouble(4, productDTO.getCostPrice());
             prepStatement.setDouble(5, productDTO.getSellPrice());
@@ -321,7 +322,17 @@ public class ProductDAO {
             throwables.printStackTrace();
         }
     }
-
+    public void DeleteProduct(int pid,String pcode) {
+        try {
+            String query = "DELETE FROM currentstock WHERE productcode='"+pcode+"';";
+            String query2 = "DELETE FROM products WHERE productcode='"+pcode+"' AND pid='"+pid+"';";
+            statement.executeUpdate(query);
+            statement.executeUpdate(query2);
+            JOptionPane.showMessageDialog(null, "Product Deleted.");
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
     // Method to permanently delete a product from inventory
     public void deleteProductDAO(String code) {
         try {
@@ -407,7 +418,7 @@ public class ProductDAO {
     // Products data set retrieval for display
     public ResultSet getQueryResult() {
         try {
-            String query = "SELECT pid,suppid,productname,costprice,sellprice,brand,quality FROM products ORDER BY pid";
+            String query = "SELECT pid,productcode,suppid,productname,sellprice,brand,quality FROM products ORDER BY pid";
             resultSet = statement.executeQuery(query);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -432,6 +443,16 @@ public class ProductDAO {
     public ResultSet getCurrentStockInfo() {
         try {
             String query = "SELECT currentstock.ProductCode,products.ProductName,currentstock.Quantity,products.CostPrice,products.SellPrice FROM currentstock INNER JOIN products ON currentstock.productcode=products.productcode";
+                    
+            resultSet = statement.executeQuery(query);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return resultSet;
+    }
+    public ResultSet getCurrentStockInfo_supp(String id) {
+        try {
+            String query = "SELECT currentstock.ProductCode,products.ProductName,currentstock.Quantity,products.CostPrice,products.SellPrice FROM currentstock INNER JOIN products ON currentstock.productcode=products.productcode WHERE products.suppid="+id+";";
                     
             resultSet = statement.executeQuery(query);
         } catch (SQLException throwables) {

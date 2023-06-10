@@ -357,11 +357,12 @@ public class SupplierLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
-        ProductDTO productDTO = new ProductDTO();
+         ProductDTO productDTO = new ProductDTO();
         if (nameText.getText().equals("") || costText.getText().equals("")
             || sellText.getText().equals("") || brandText.getText().equals(""))
         JOptionPane.showMessageDialog(null, "Please enter all the required details.");
         else {
+            productDTO.setSuppID(Integer.parseInt(userid));
             productDTO.setProdCode(codeText.getText());
             productDTO.setProdName(nameText.getText());
             //            productDTO.setDate(jDateChooser1.getDateFormatString());
@@ -371,7 +372,7 @@ public class SupplierLogin extends javax.swing.JFrame {
             productDTO.setCostPrice(Double.parseDouble(costText.getText()));
             productDTO.setSellPrice(Double.parseDouble(sellText.getText()));
             productDTO.setBrand(brandText.getText());
-            productDTO.setUserID(Integer.parseInt(userid));
+//            productDTO.setUserID(Integer.parseInt(userid));
             new ProductDAO().addProductDAO(productDTO);
             loadDataSet();
         }
@@ -433,7 +434,7 @@ public class SupplierLogin extends javax.swing.JFrame {
     public void loadDataSet() {
         try {
             ProductDAO productDAO = new ProductDAO();
-            salesTable.setModel(productDAO.buildTableModel(productDAO.getCurrentStockInfo()));
+            salesTable.setModel(productDAO.buildTableModel(productDAO.getCurrentStockInfo_supp(userid)));
         } catch (SQLException e) {
             e.printStackTrace();
         }

@@ -489,8 +489,8 @@ public class CustomerLogin extends javax.swing.JFrame {
         for (int i=0; i<col; i++)
         data[i] = productTable.getValueAt(row, i);
         //        Amount.setText((String) data[3]);
-        suppid=(int)data[1];
-        price= (double)data[3];
+        suppid=(int)data[2];
+        price= (double)data[4];
         //        Amount.setText((String) data[1]);
         //        locationText.setText((String) data[2]);
         //        phoneText.setText((String) data[3]);

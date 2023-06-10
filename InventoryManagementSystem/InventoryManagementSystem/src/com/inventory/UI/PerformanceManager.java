@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package com.inventory.UI;
+import com.inventory.DAO.ProductDAO;
 import com.inventory.DAO.UserDAO;
 import com.inventory.DTO.UserDTO;
 import java.sql.SQLException;
@@ -19,6 +20,7 @@ public class PerformanceManager extends javax.swing.JFrame {
      * Creates new form PerformanceManager
      */
     String userid;
+    int Delid;
     UserDTO userDTO;
     LocalDateTime outTime;
     String username;
@@ -47,6 +49,7 @@ public class PerformanceManager extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         EmployeeTable = new javax.swing.JTable();
         jSeparator1 = new javax.swing.JSeparator();
+        Delete = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         entryPanel = new javax.swing.JPanel();
@@ -83,11 +86,21 @@ public class PerformanceManager extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(EmployeeTable);
 
+        Delete.setText("Delete");
+        Delete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DeleteActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 905, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(367, 367, 367)
+                .addComponent(Delete)
+                .addContainerGap(430, Short.MAX_VALUE))
             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel3Layout.createSequentialGroup()
                     .addContainerGap()
@@ -100,14 +113,17 @@ public class PerformanceManager extends javax.swing.JFrame {
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 492, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(410, Short.MAX_VALUE)
+                .addComponent(Delete)
+                .addGap(47, 47, 47))
             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel3Layout.createSequentialGroup()
                     .addGap(13, 13, 13)
                     .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(13, Short.MAX_VALUE)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(115, Short.MAX_VALUE)))
         );
 
         jTabbedPane1.addTab("View Employees", jPanel3);
@@ -273,6 +289,7 @@ public class PerformanceManager extends javax.swing.JFrame {
         Object[] data = new Object[col];
         for (int i=0; i<col; i++)
         data[i] = EmployeeTable.getValueAt(row, i);
+        Delid=(int)data[0];
         //        quantity = Integer.parseInt(data[3].toString());
         //        prodCode = data[1].toString();
     }//GEN-LAST:event_EmployeeTableMouseClicked
@@ -294,6 +311,11 @@ public class PerformanceManager extends javax.swing.JFrame {
             logPage.setVisible(true);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void DeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteActionPerformed
+        // TODO add your handling code here:
+        new UserDAO().deleteUserDAO_id(Delid);
+    }//GEN-LAST:event_DeleteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -339,6 +361,7 @@ public class PerformanceManager extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Delete;
     private javax.swing.JTable EmployeeTable;
     private javax.swing.JTextField Location;
     private javax.swing.JTextField Username;
