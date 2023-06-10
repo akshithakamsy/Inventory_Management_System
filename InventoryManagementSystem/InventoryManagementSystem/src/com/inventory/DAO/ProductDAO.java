@@ -425,6 +425,15 @@ public class ProductDAO {
         }
         return resultSet;
     }
+    public ResultSet getQueryResult_quality() {
+        try {
+            String query = "SELECT pid,productcode,suppid,productname,sellprice,brand,quality FROM products WHERE quality !='None' ORDER BY pid";
+            resultSet = statement.executeQuery(query);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return resultSet;
+    }
 
     // Purchase table data set retrieval
     public ResultSet getPurchaseInfo() {
@@ -524,7 +533,16 @@ public class ProductDAO {
         }
         return resultSet;
     }
-
+    public ResultSet getProductSearch_quality(String text) {
+        try {
+            String query = "SELECT productcode,productname,costprice,sellprice,brand FROM products " +
+                    "WHERE quality!='None' and (productcode LIKE '%"+text+"%' OR productname LIKE '%"+text+"%' OR brand LIKE '%"+text+"%');";
+            resultSet = statement.executeQuery(query);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return resultSet;
+    }
     public ResultSet getProdFromCode(String text) {
         try {
             String query = "SELECT productcode,productname,costprice,sellprice,brand FROM products " +

@@ -32,6 +32,7 @@ public class SupplierAdmin extends javax.swing.JFrame {
         displayPanel.setLayout(layout);
         displayPanel.add("signup", new SupplierSignup());
         displayPanel.add("viewSuppliers", new ViewSuppliers());
+        displayPanel.add("QualityUpdate", new QualityUpdate());
     }
     public SupplierAdmin(String id,String username,UserDTO userDTO) {
         initComponents();
@@ -43,6 +44,7 @@ public class SupplierAdmin extends javax.swing.JFrame {
         displayPanel.add("signup", new SupplierSignup());
         displayPanel.add("viewSuppliers", new ViewSuppliers());
         displayPanel.add("deleteproducts", new DeleteProducts());
+        displayPanel.add("quality", new QualityUpdate());
     }
 
     /**
@@ -61,6 +63,7 @@ public class SupplierAdmin extends javax.swing.JFrame {
         ViewSuppliers = new javax.swing.JButton();
         Products = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        logout = new javax.swing.JButton();
 
         jButton2.setText("jButton2");
 
@@ -93,17 +96,24 @@ public class SupplierAdmin extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("Quality Update");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout navPanelLayout = new javax.swing.GroupLayout(navPanel);
         navPanel.setLayout(navPanelLayout);
         navPanelLayout.setHorizontalGroup(
             navPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(navPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(navPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(navPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(ViewSuppliers, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addComponent(Products, javax.swing.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE))
-                    .addComponent(SuppSignup, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(navPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(ViewSuppliers, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(Products, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(SuppSignup, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         navPanelLayout.setVerticalGroup(
@@ -115,13 +125,15 @@ public class SupplierAdmin extends javax.swing.JFrame {
                 .addComponent(Products, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(ViewSuppliers, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jButton1.setText("Logout");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        logout.setText("Logout");
+        logout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                logoutActionPerformed(evt);
             }
         });
 
@@ -131,8 +143,8 @@ public class SupplierAdmin extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(35, 35, 35)
-                .addComponent(jButton1)
-                .addContainerGap(774, Short.MAX_VALUE))
+                .addComponent(logout)
+                .addContainerGap(782, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
@@ -144,9 +156,9 @@ public class SupplierAdmin extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(338, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(207, 207, 207))
+                .addContainerGap(470, Short.MAX_VALUE)
+                .addComponent(logout)
+                .addGap(75, 75, 75))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(11, 11, 11)
@@ -169,7 +181,7 @@ public class SupplierAdmin extends javax.swing.JFrame {
         viewSuppliers();
     }//GEN-LAST:event_ViewSuppliersActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void logoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutActionPerformed
         // TODO add your handling code here:
 //        dispose();
 //        LoginPage login = new LoginPage();
@@ -188,17 +200,25 @@ public class SupplierAdmin extends javax.swing.JFrame {
             LoginPage logPage = new LoginPage();
             logPage.setVisible(true);
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_logoutActionPerformed
 
     private void ProductsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ProductsActionPerformed
         // TODO add your handling code here:
         layout.show(displayPanel, "deleteproducts");
     }//GEN-LAST:event_ProductsActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        ViewQualityUpdates();
+    }//GEN-LAST:event_jButton1ActionPerformed
     public void addSignupPage(){
         layout.show(displayPanel, "signup");
     }
     public void viewSuppliers(){
         layout.show(displayPanel, "viewSuppliers");
+    }
+    public void ViewQualityUpdates(){
+        layout.show(displayPanel, "quality");
     }
     
     /**
@@ -243,6 +263,7 @@ public class SupplierAdmin extends javax.swing.JFrame {
     private javax.swing.JPanel displayPanel;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton logout;
     private javax.swing.JPanel navPanel;
     // End of variables declaration//GEN-END:variables
 

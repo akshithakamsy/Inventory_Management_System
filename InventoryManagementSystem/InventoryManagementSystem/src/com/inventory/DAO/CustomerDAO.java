@@ -13,6 +13,7 @@ import javax.swing.table.DefaultTableModel;
 import java.sql.*;
 import java.util.Locale;
 import java.util.Vector;
+import org.jfree.data.jdbc.JDBCCategoryDataset;
 
 /**
  *
@@ -25,6 +26,7 @@ public class CustomerDAO {
     PreparedStatement prepStatement= null;
     Statement statement = null;
     ResultSet resultSet = null;
+    JDBCCategoryDataset result=null;
 
     public CustomerDAO() {
         try {
@@ -124,6 +126,16 @@ public class CustomerDAO {
     public ResultSet getCustName(String custCode) {
         try {
             String query = "SELECT * FROM customers WHERE customercode='" +custCode+ "'";
+            resultSet = statement.executeQuery(query);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return resultSet;
+    }
+    
+    public ResultSet getBarChart() {
+        try {
+            String query = "select usertype, count(*) as count from users where usertype in ('SupplierAdmin','PerformanceManager','DeliveryManager','CUSTOMER') group by usertype";
             resultSet = statement.executeQuery(query);
         } catch (SQLException e) {
             e.printStackTrace();

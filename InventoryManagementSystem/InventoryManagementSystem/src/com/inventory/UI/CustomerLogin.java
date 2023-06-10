@@ -456,7 +456,7 @@ public class CustomerLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton5jButton1ActionPerformed
 
     private void addButton2addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButton2addButtonActionPerformed
-        if (Quantity2.getText().equals(""))
+        if (Quantity2.getText().equals("") || Amount2.getText().equals("") )
         JOptionPane.showMessageDialog(this, "Please enter the quantity.");
         else {
             SalesDTO sales =  new SalesDTO();
@@ -478,6 +478,8 @@ public class CustomerLogin extends javax.swing.JFrame {
 
             new SalesDAO().addFunction(sales);
             loadDataSet();
+            Amount2.setText("");
+            Quantity2.setText("");
         }
     }//GEN-LAST:event_addButton2addButtonActionPerformed
 
