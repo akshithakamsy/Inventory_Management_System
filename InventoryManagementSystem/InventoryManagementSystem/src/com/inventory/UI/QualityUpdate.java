@@ -16,6 +16,9 @@ public class QualityUpdate extends javax.swing.JPanel {
     /**
      * Creates new form QualityUpdate
      */
+    int pid,suppid;
+    String productcode,productname;
+    
     public QualityUpdate() {
         initComponents();
         loadDataSet();
@@ -157,6 +160,10 @@ public class QualityUpdate extends javax.swing.JPanel {
         Object[] data = new Object[col];
         for (int i=0; i<col; i++)
         data[i] = productTable_1.getValueAt(row, i);
+        pid=(int)data[0];
+        productcode=data[1].toString();
+        suppid=(int)data[2];
+        productname=data[3].toString();
 
         // productName = data[1].toString();
     }//GEN-LAST:event_productTable_1MouseClicked
@@ -171,6 +178,7 @@ public class QualityUpdate extends javax.swing.JPanel {
 
     private void ReviewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReviewActionPerformed
         // TODO add your handling code here:
+        new ProductDAO().sendforReview(pid,suppid,productcode,productname,"SupplierAdmin");
     }//GEN-LAST:event_ReviewActionPerformed
     
     public void loadDataSet() {

@@ -136,6 +136,19 @@ public class UserDAO {
         }
         new UsersPage().loadDataSet();
     }
+    
+    public void removeRequest(int id) {
+        try {
+            String query = "DELETE FROM recheck WHERE pid=?";
+            prepStatement = (PreparedStatement) conn.prepareStatement(query);
+            prepStatement.setInt(1, id);
+            prepStatement.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Request Rejected.");
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        new UsersPage().loadDataSet();
+    }
     public void deleteUserDAO_id(int id) {
         try {
             String query = "DELETE FROM users WHERE id=?";
@@ -159,7 +172,15 @@ public class UserDAO {
         }
         return resultSet;
     }
-    
+    public ResultSet getQueryResult_Recheck() {
+        try {
+            String query = "SELECT * FROM recheck WHERE complainant = 'SupplierAdmin';";
+            resultSet = statement.executeQuery(query);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return resultSet;
+    }
     public ResultSet getQueryResult_EMPLOYEE() {
         try {
             String query = "SELECT * FROM users where usertype='EMPLOYEE'";
@@ -260,6 +281,18 @@ public class UserDAO {
             prepStatement.setString(2, username);
             prepStatement.executeUpdate();
             JOptionPane.showMessageDialog(null, "Password has been changed.");
+        } catch (SQLException ex){
+            ex.printStackTrace();
+        }
+    }
+    
+    public void approveRequest(int id) {
+        try {
+            String query = "UPDATE recheck SET complainant=? WHERE pid='" +id+ "'";
+            prepStatement = (PreparedStatement) conn.prepareStatement(query);
+            prepStatement.setString(1, "PerformanceManager");
+            prepStatement.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Request Approved.");
         } catch (SQLException ex){
             ex.printStackTrace();
         }

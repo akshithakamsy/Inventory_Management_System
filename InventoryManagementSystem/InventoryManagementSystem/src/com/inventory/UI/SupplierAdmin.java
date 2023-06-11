@@ -33,6 +33,7 @@ public class SupplierAdmin extends javax.swing.JFrame {
         displayPanel.add("signup", new SupplierSignup());
         displayPanel.add("viewSuppliers", new ViewSuppliers());
         displayPanel.add("QualityUpdate", new QualityUpdate());
+        displayPanel.add("reviews", new Reviews());
     }
     public SupplierAdmin(String id,String username,UserDTO userDTO) {
         initComponents();
@@ -45,6 +46,7 @@ public class SupplierAdmin extends javax.swing.JFrame {
         displayPanel.add("viewSuppliers", new ViewSuppliers());
         displayPanel.add("deleteproducts", new DeleteProducts());
         displayPanel.add("quality", new QualityUpdate());
+        displayPanel.add("reviews", new Reviews());
     }
 
     /**
@@ -63,6 +65,7 @@ public class SupplierAdmin extends javax.swing.JFrame {
         ViewSuppliers = new javax.swing.JButton();
         Products = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
         logout = new javax.swing.JButton();
 
         jButton2.setText("jButton2");
@@ -103,18 +106,27 @@ public class SupplierAdmin extends javax.swing.JFrame {
             }
         });
 
+        jButton3.setText("Customer Reviews");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout navPanelLayout = new javax.swing.GroupLayout(navPanel);
         navPanel.setLayout(navPanelLayout);
         navPanelLayout.setHorizontalGroup(
             navPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(navPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(navPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(ViewSuppliers, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(Products, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(SuppSignup, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(navPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(navPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(ViewSuppliers, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(Products, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(SuppSignup))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
         navPanelLayout.setVerticalGroup(
             navPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -127,6 +139,8 @@ public class SupplierAdmin extends javax.swing.JFrame {
                 .addComponent(ViewSuppliers, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -144,7 +158,7 @@ public class SupplierAdmin extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(35, 35, 35)
                 .addComponent(logout)
-                .addContainerGap(782, Short.MAX_VALUE))
+                .addContainerGap(808, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
@@ -211,6 +225,11 @@ public class SupplierAdmin extends javax.swing.JFrame {
         // TODO add your handling code here:
         ViewQualityUpdates();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        ViewReviews();
+    }//GEN-LAST:event_jButton3ActionPerformed
     public void addSignupPage(){
         layout.show(displayPanel, "signup");
     }
@@ -219,6 +238,9 @@ public class SupplierAdmin extends javax.swing.JFrame {
     }
     public void ViewQualityUpdates(){
         layout.show(displayPanel, "quality");
+    }
+    public void ViewReviews(){
+        layout.show(displayPanel, "reviews");
     }
     
     /**
@@ -263,6 +285,7 @@ public class SupplierAdmin extends javax.swing.JFrame {
     private javax.swing.JPanel displayPanel;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JButton logout;
     private javax.swing.JPanel navPanel;
     // End of variables declaration//GEN-END:variables

@@ -61,6 +61,10 @@ public class ProductQuality extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         qualityTable1 = new javax.swing.JTable();
         jButton2 = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
+        Done = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        productTable_1 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -193,6 +197,58 @@ public class ProductQuality extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Review Analysis", jPanel2);
 
+        Done.setText("Done");
+        Done.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DoneActionPerformed(evt);
+            }
+        });
+
+        productTable_1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        productTable_1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        productTable_1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                productTable_1MouseClicked(evt);
+            }
+        });
+        jScrollPane3.setViewportView(productTable_1);
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 551, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(62, 62, 62)
+                .addComponent(Done)
+                .addContainerGap(149, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(38, 38, 38)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 419, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(221, 221, 221)
+                        .addComponent(Done)))
+                .addContainerGap(40, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Review Recheck", jPanel3);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -258,6 +314,28 @@ public class ProductQuality extends javax.swing.JFrame {
     private void searchTextKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchTextKeyReleased
         loadSearchData(searchText.getText());
     }//GEN-LAST:event_searchTextKeyReleased
+
+    private void DoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DoneActionPerformed
+        // TODO add your handling code here:
+        new UserDAO().removeRequest(pid);
+        loadDataSet();
+    }//GEN-LAST:event_DoneActionPerformed
+
+    private void productTable_1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_productTable_1MouseClicked
+        int row = productTable_1.getSelectedRow();
+        int col = productTable_1.getColumnCount();
+
+        Object[] data = new Object[col];
+        for (int i=0; i<col; i++)
+        data[i] = productTable_1.getValueAt(row, i);
+        pid=(int)data[0];
+        //        pid=(int)data[0];
+        //        productcode=data[1].toString();
+        //        suppid=(int)data[2];
+        //        productname=data[3].toString();
+
+        // productName = data[1].toString();
+    }//GEN-LAST:event_productTable_1MouseClicked
     
     public void loadSearchData(String text) {
         try {
@@ -273,6 +351,7 @@ public class ProductQuality extends javax.swing.JFrame {
             SalesDAO sales = new SalesDAO();
             qualityTable.setModel(productDAO.buildTableModel(productDAO.getQueryResult()));
             qualityTable1.setModel(sales.buildTableModel(sales.getQueryResult_review()));
+            productTable_1.setModel(productDAO.buildTableModel(productDAO.getQueryResult_approved()));
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -314,14 +393,18 @@ public class ProductQuality extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Done;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTable productTable_1;
     private javax.swing.JComboBox<String> quality;
     private javax.swing.JTable qualityTable;
     private javax.swing.JTable qualityTable1;

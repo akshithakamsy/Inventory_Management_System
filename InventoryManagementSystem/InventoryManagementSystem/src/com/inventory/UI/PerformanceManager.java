@@ -20,6 +20,7 @@ public class PerformanceManager extends javax.swing.JFrame {
      * Creates new form PerformanceManager
      */
     String userid;
+    int pid;
     int Delid;
     UserDTO userDTO;
     LocalDateTime outTime;
@@ -65,6 +66,12 @@ public class PerformanceManager extends javax.swing.JFrame {
         Location = new javax.swing.JTextField();
         addButton = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        Approve = new javax.swing.JButton();
+        jSeparator2 = new javax.swing.JSeparator();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        productTable_1 = new javax.swing.JTable();
+        Reject = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -240,6 +247,78 @@ public class PerformanceManager extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Create Employee", jPanel2);
 
+        Approve.setText("Approve");
+        Approve.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ApproveActionPerformed(evt);
+            }
+        });
+
+        productTable_1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        productTable_1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        productTable_1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                productTable_1MouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(productTable_1);
+
+        Reject.setText("Reject");
+        Reject.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RejectActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(635, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(Approve, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(Reject, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(155, 155, 155))
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGap(53, 53, 53)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jSeparator2)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 551, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(0, 248, Short.MAX_VALUE)))
+                    .addGap(53, 53, 53)))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(174, 174, 174)
+                .addComponent(Approve)
+                .addGap(29, 29, 29)
+                .addComponent(Reject)
+                .addContainerGap(219, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGap(28, 28, 28)
+                    .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 419, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(29, Short.MAX_VALUE)))
+        );
+
+        jTabbedPane1.addTab("Recheck Requests", jPanel1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -317,6 +396,34 @@ public class PerformanceManager extends javax.swing.JFrame {
         new UserDAO().deleteUserDAO_id(Delid);
     }//GEN-LAST:event_DeleteActionPerformed
 
+    private void ApproveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ApproveActionPerformed
+        // TODO add your handling code here:
+        new UserDAO().approveRequest(pid);
+        loadDataSet();
+    }//GEN-LAST:event_ApproveActionPerformed
+
+    private void productTable_1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_productTable_1MouseClicked
+        int row = productTable_1.getSelectedRow();
+        int col = productTable_1.getColumnCount();
+
+        Object[] data = new Object[col];
+        for (int i=0; i<col; i++)
+        data[i] = productTable_1.getValueAt(row, i);
+        pid=(int)data[0];
+//        pid=(int)data[0];
+//        productcode=data[1].toString();
+//        suppid=(int)data[2];
+//        productname=data[3].toString();
+
+        // productName = data[1].toString();
+    }//GEN-LAST:event_productTable_1MouseClicked
+
+    private void RejectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RejectActionPerformed
+        // TODO add your handling code here:
+        new UserDAO().removeRequest(pid);
+        loadDataSet();
+    }//GEN-LAST:event_RejectActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -355,15 +462,18 @@ public class PerformanceManager extends javax.swing.JFrame {
         try {
             UserDAO user= new UserDAO();
             EmployeeTable.setModel(user.buildTableModel(user.getQueryResult_EMPLOYEE()));
+            productTable_1.setModel(user.buildTableModel(user.getQueryResult_Recheck()));
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Approve;
     private javax.swing.JButton Delete;
     private javax.swing.JTable EmployeeTable;
     private javax.swing.JTextField Location;
+    private javax.swing.JButton Reject;
     private javax.swing.JTextField Username;
     private javax.swing.JButton addButton;
     private javax.swing.JTextField contact;
@@ -376,11 +486,15 @@ public class PerformanceManager extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextField password;
+    private javax.swing.JTable productTable_1;
     // End of variables declaration//GEN-END:variables
 }

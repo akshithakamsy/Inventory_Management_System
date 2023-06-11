@@ -211,6 +211,22 @@ public class ProductDAO {
         }
     }
     
+    public void sendforReview(int pid, int suppid, String productcode, String pname, String complainant) {
+        try {
+            String query = "INSERT INTO recheck VALUES(?,?,?,?,?)";
+            prepStatement = (PreparedStatement) conn.prepareStatement(query);
+            prepStatement.setInt(1, pid);
+            prepStatement.setInt(3, suppid);
+            
+            prepStatement.setString(2, productcode);
+            prepStatement.setString(4, pname);
+            prepStatement.setString(5, complainant);
+            prepStatement.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Product review has been sent for rechecking");
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
 
     // Method to add a new purchase transaction
     public void addPurchaseDAO(ProductDTO productDTO) {
@@ -434,7 +450,15 @@ public class ProductDAO {
         }
         return resultSet;
     }
-
+    public ResultSet getQueryResult_approved() {
+        try {
+            String query = "SELECT * FROM recheck WHERE complainant='PerformanceManager';";
+            resultSet = statement.executeQuery(query);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return resultSet;
+    }
     // Purchase table data set retrieval
     public ResultSet getPurchaseInfo() {
         try {
